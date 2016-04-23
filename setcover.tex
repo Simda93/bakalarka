@@ -1,0 +1,26 @@
+\chapter{Set Cover problém a výber génov}
+\section{Definícia Set Cover problému}
+Pre dané Univerzum $U$, ktoré obsahuje $n$ prvkov, a sadu podmnožín univerza \(S=\{ S_i : S_i \subseteq U \}\)
+, ktorá pokrýva celé univerzum \(\{\cup S = U\}\),vybrať čo najmenšiu pod-sadu \(C \subseteq S\) takú že jej zjednotenie pokryje celé Univerzum 
+\(\cup_{S \epsilon C} S = U \) .\\ Set Cover problém patrí medzi NP tažké problémy.
+\section{Výber génov}
+Pri analýze \emph{Evolučnej histórie} nás zaujímajú udalosti ktoré sa v nej odohrali. Veľké množstvo génov v evolučnej histórii môže viesť k neprehľadnosti a nemožnosti udalosť na obrázku identifikovať.
+Z obrázku teda potrebujeme odstrániť prebytočné gény tak, aby sme nestratili informácie o udalostiach ktoré sa v histórii odohrali.
+\paragraph{Pokrytie blokov}
+Gény ktoré zobrazíme budeme vyberať na základe toho, koľko blokov zostane pokrytých.
+Blok považujeme za pokrytý pokiaľ sa v zobrazení nachádza aspoň jeden gén z daného bloku.
+Pokrytie bloku nám zároveň zachová približnú vizuálnu informáciu o tom aká udalosť sa tu odohráva.
+\subsection{Výber génov pomocou Set Coveru}
+Výber takých génov ktoré pokryjú všetky bloky vieme riešiť ako set cover problém.
+Univerzum predstavuje všetky bloky ktoré sa nachádzajú v našom fylogenetickom strome.
+Každý gén predstavuje jednu podmnožinu, v ktorej sa nachádzajú tie bloky, cez ktoré gén prechádza.
+Riešením je taká množina génov, ktoré dokopy pokrývajú všetky bloky nachádzajúce sa v evolučnej histórii.
+\section{Riešenie Set Cover problému}
+\subsection{Greedy algoritmus}
+Greedy algoritmus nám umožnuje v polynomiálnom čase nájsť približné riešenie set cover problému.
+% Peter Slavik A tight analysis of the greedy algorithm for set cover
+\paragraph{Algoritmus} Zoradíme si všetky podmnožiny na základe toho koľko prvkov obsahujú.
+Do riešenia vyberieme najvačšiu podmnožinu, prvky ktoré sa v nej nachádzajú odstránime z Univerza aj zo zvyšných podmnožín, tie opäť zoradíme a postup opakujeme až pokým nieje Univerzum prázdne.
+%ok pseudo code by bol asi lepsi
+\subsection{ILP}
+Náš Set Cover problém zapíšeme/pretransformujeme ako \emph{Integer Linear Programming} problém
