@@ -1,0 +1,32 @@
+Generator 
+generator dostane na vstupe subor v ktorom sa nachadza pocet nodov,pocet genov,pravdepodobnost s akou nasledujuci prvok zahrnieme do udalosti.
+za kazdu udalost vo vstupnom subore zapiseme cislo = 0 znamena ze sa neuskutocni, inak sa uskutocni pomerne k zvysnym udalostiam podla ich cisiel
+pre inserciu a deleciu zapiseme aj maximalne mnozstvo vlozenych/odstranenych genov  --asi by stacilo pre inserciu 
+nasledne si vytvorime prvu udalost N genov 0 - n-1 ,
+pre kazdy dalsi node si na zaciatku vyberieme miesto kam ho umiestnime , kopirujeme geny s ktorymi sa nic nedeje az pokial sa dostaneme k miestu kde ma byt umiestnena udalost vtedy si vyberieme o aky typ udalosti sa ma jednat a kolko genov sa v nej nachadza.
+Ak bola udalostou translokacia tak translokovane geny nakoniec presunieme na miesto v genome ktore je ine ako miesto z ktoreho sme ich odstranili.
+
+//zlepsenia - najpr vybrat udalost, potom pocet genov v nej a az nakoniec ju umiestnit
+
+CMD line interface 
+pri spusteni bak.jar sa nam defaultne spusti GUI, ak gui nepotrebujeme a program spustame lebo chceme vygenerovat svgcka/ilp zadania/greedy riesenia vyuzijeme neinteraktivny cmd line.
+prikazy :
+-nogui /GUI sa nespusti program zbehne len na zaklade prvotnych argumentov
+-input:input.history /zada input
+-exportilp /vypluje nam output.lp
+-ilp_output:output.lp /zvolime si meno pre output.lp 
+-exportgreedy /exportuje output.greedy
+-greedy_output:output.greedy /meno greedy exportu
+-drawsvg /vyexportuje output.svg
+-svg_output:output.svg /meno svg outputu
+-opt /zoptimalizuje historiu pred tym ako ju vyexportuje
+-load_settings:settings.xml nacita nastavenia ktore budu pouzite pri svg
+
+
+
+TESTOVANIE
+Potrebujeme odsledovat:
+Mnozstvo prvkov a cas greedy riesenia (cas programu pri generovani greeedy - cas nacitania historie)
+Mnozstvo prvkov a cas ILP riesenia (cas generovania ILP historie/cas behu cplexu)
+
+
