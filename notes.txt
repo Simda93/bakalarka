@@ -30,3 +30,8 @@ Mnozstvo prvkov a cas greedy riesenia (cas programu pri generovani greeedy - cas
 Mnozstvo prvkov a cas ILP riesenia (cas generovania ILP historie/cas behu cplexu)
 
 
+
+TODO :
+dorobit import emport do XML v settings, napr nonhighlighted color
+
+

@@ -1,16 +1,20 @@
-\documentclass[12pt, oneside]{book}
+\documentclass[12pt,oneside,a4paper]{book}
+\usepackage[a4paper,top=2.5cm,bottom=2.5cm,left=3.5cm,right=2cm]{geometry}
 \usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
 \usepackage{graphicx}
-\usepackage[slovak]{babel}
-\linespread{1.2}
+\usepackage{url}
+\usepackage[slovak]{babel} % vypnite pre prace v anglictine
+\linespread{1.25} % hodnota 1.25 by mala zodpovedat 1.5 riadkovaniu
+\overfullrule=2cm
 
 % -------------------
 % --- Definicia zakladnych pommov
 % -------------------
 \def\*{{\bf FIXME: }}
-\def\mfyear{2015}
+\def\mfyear{2016}
 \def\mftitle{Vizualizácia evolučných histórií}
-\def\mfthesistype{bakalárska práca}
+\def\mfthesistype{Bakalárska práca}
 \def\mfauthor{Dávid Simeunovič}
 \def\mfadvisor{doc. Mgr. Bronislava Brejová, PhD.}
 \def\mfplacedate{Bratislava, \mfyear}
@@ -18,38 +22,46 @@
 \def\program{ Informatika }
 \def\stredisko{ Katedra Informatiky }
 
+\def\mfrok{2016}
+\def\mfnazov{Vizualizácia evolučných histórií}
+\def\mftyp{Bakalárska práca}
+\def\mfautor{Dávid Simeunovič}
+\def\mfskolitel{doc. Mgr. Bronislava Brejová, PhD.}
+
+%ak mate konzultanta, odkomentujte aj jeho meno na titulnom liste
+\def\mfkonzultant{tit. Meno Priezvisko, tit. }  
+
+\def\mfmiesto{Bratislava, \mfrok}
+
+%aj cislo odboru je povinne a je podla studijneho odboru autora prace
+\def\mfodbor{2508 Informatika} 
+\def\program{ Informatika }
+\def\mfpracovisko{ Katedra informatiky }
+
 \begin{document}     
 
 % -------------------
 % --- Obalka ------
 % -------------------
 \thispagestyle{empty}
-\noindent
 
-\begin{minipage}{0.95\textwidth}
 \begin{center}
-\sc  
-\large
-\vspace*{0.3cm} Univerzita Komenského v Bratislave\\
-\vspace*{0.3cm} Fakulta matematiky, fyziky a informatiky\\
+\sc\large
+Univerzita Komenského v Bratislave\\
+Fakulta matematiky, fyziky a informatiky
+
+\vfill
+
+{\LARGE\mfnazov}\\
+\mftyp
 \end{center}
-\end{minipage}
 
 \vfill
 
-\begin{minipage}{1.1\textwidth}
-\begin{flushright}
-\bigskip\bigskip
-\centerline{\sc\LARGE\mftitle}
-\centerline{\sc\mfthesistype}
-
-\bigskip\bigskip\bigskip\bigskip
-\end{flushright}
-\end{minipage}
-\vfill
-
-\noindent \mfyear\\
-\indent\mfauthor
+{\sc\large 
+\noindent \mfrok\\
+\mfautor
+}
 
 \eject % EOP i
 % --- koniec obalky ----
@@ -61,39 +73,34 @@
 \thispagestyle{empty}
 \noindent
 
-\begin{minipage}{0.95\textwidth}
 \begin{center}
 \sc  
 \large
-\vspace*{0.3cm} Univerzita Komenského v Bratislave\\
-\vspace*{0.3cm} Fakulta matematiky, fyziky a informatiky\\
-\end{center}
-\end{minipage}
+Univerzita Komenského v Bratislave\\
+Fakulta matematiky, fyziky a informatiky
 
 \vfill
 
-\begin{minipage}{1.1\textwidth}
-\begin{flushright}
-\bigskip\bigskip
-\centerline{\sc\LARGE\mftitle}
-\centerline{\sc\mfthesistype}
-\end{flushright}
+{\LARGE\mfnazov}\\
+\mftyp
+\end{center}
 
-\bigskip
-\vspace{3cm}
-\bigskip
+\vfill
+
+\noindent
 \begin{tabular}{ll}
 Študijný program: & \program \\
-Študijný odbor: & \odbor \\
-Školiace pracovisko: & \stredisko \\
-Školiteľ: & \mfadvisor \\
+Študijný odbor: & \mfodbor \\
+Školiace pracovisko: & \mfpracovisko \\
+Školiteľ: & \mfskolitel \\
+% Konzultant: & \mfkonzultant \\
 \end{tabular}
 
-\end{minipage}
 \vfill
 
-\noindent \mfplacedate\\
-\indent\mfauthor
+
+\noindent \mfmiesto\\
+\mfautor
 
 \eject % EOP i
 
@@ -109,7 +116,7 @@
 
 \newpage 
 \thispagestyle{empty}
-\hspace{-1cm}\includegraphics[width=1.2\textwidth]{images/zadanie}
+\hspace{-2cm}\includegraphics[width=1.1\textwidth]{images/zadanie}
 
 % --- Koniec zadania
 
@@ -118,11 +125,13 @@
 % -------------------
 %   Poďakovanie - nepovinné
 % -------------------
+\setcounter{page}{3}
 \newpage 
-\thispagestyle{empty}
+~
 
 \vfill
 {\bf Poďakovanie:}
+
 
 % --- Koniec poďakovania
 
@@ -130,15 +139,18 @@
 %   Abstrankt - Slovensky
 % -------------------
 \newpage 
-\thispagestyle{empty}
+\section*{Abstrakt}
 
-\huge{Abstrakt}
-\normalsize
-\newline
-\newline
-Počas evolúcie dochádza v DNA k lokálnym mutáciám, ktoré menia jeden alebo niekoľko susedných nukleotidov, ale aj k väčším zmenám, ktoré menia poradie alebo počet výskytov dlhších oblastí.  Cieľom práce je implementovať systém na vizualizáciu evolučnej histórie jednej alebo viacerých DNA sekvencií s dôrazom na tieto väčšie zmeny. Samotná história je daná na vstupe a cieľom je zobraziť ju tak, aby sa dali prehľadne sledovať jednotlivé mutácie a tiež vzťahy rôznych častí sekvencie.
-\newline
-{\bf Kľúčové slová:} vizualizácia,evolučná história,poradie génov
+Počas evolúcie dochádza v DNA k lokálnym mutáciám, 
+ktoré menia jeden alebo niekoľko susedných nukleotidov, 
+ale aj k väčším zmenám, ktoré menia poradie alebo počet výskytov dlhších oblastí.
+Cieľom práce je implementovať systém na vizualizáciu evolučnej histórie jednej 
+alebo viacerých DNA sekvencií s dôrazom na tieto väčšie zmeny. Samotná história 
+je daná na vstupe a cieľom je zobraziť ju tak, aby sa dali prehľadne sledovať jednotlivé
+mutácie a tiež vzťahy rôznych častí sekvencie.
+
+
+\paragraph*{Kľúčové slová:} vizualizácia,evolučná história,poradie génov
 % --- Koniec Abstrakt - Slovensky
 
 
@@ -146,19 +158,18 @@ Počas evolúcie dochádza v DNA k lokálnym mutáciám, ktoré menia jeden aleb
 % --- Abstrakt - Anglicky 
 % -------------------
 \newpage 
-\thispagestyle{empty}
+\section*{Abstract}
 
-\huge{Abstract}
-\normalsize
-\newline
-English abstract
+Abstract in the English language (translation of the abstract in the
+Slovak language).
 
-{\bf Keywords:} 
+
+\paragraph*{Keywords:} 
 
 % --- Koniec Abstrakt - Anglicky
 
 % -------------------
-% --- Predhovor ?????
+% --- Predhovor - v informatike sa zvacsa nepouziva
 % -------------------
 %\newpage 
 %\thispagestyle{empty}
