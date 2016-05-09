@@ -1,26 +1,66 @@
-\chapter{Set Cover problém a výber génov}
-\section{Definícia Set Cover problému}
-Pre dané Univerzum $U$, ktoré obsahuje $n$ prvkov, a sadu podmnožín univerza \(S=\{ S_i : S_i \subseteq U \}\)
-, ktorá pokrýva celé univerzum \(\{\cup S = U\}\),vybrať čo najmenšiu pod-sadu \(C \subseteq S\) takú že jej zjednotenie pokryje celé Univerzum 
-\(\cup_{S \epsilon C} S = U \) .\\ Set Cover problém patrí medzi NP tažké problémy.
+\chapter{Problém množinového pokrytia a výber génov}
+V predchádzajúcej kapitole sme si predstavili základné prvky nášho programu ktorý dostane na vstupe súbor, 
+popisujúci evolučnú históriu a na výstupe nám vykreslí fylogenetický strom reprezentujúci danú históriu.
+Problém nastane, pokiaľ v histórii nachádza príliš veľa génov. Výsledný vygenerovaný obrázok sa stáva neprehľadným, 
+a získanie informácie z neho obtiažne. 
+Potrebujeme teda vybrať iba niektoré gény na zobrazenie tak, aby na obrázku zostali zachované podstatné informácie.
+V tejto kapitole si predstavíme spôsob, akým budeme vyberať ktoré gény zobrazíme,
+využitie \emph{Problému množinového pokrytia} pri hľadaní daných génov a dva algoritmy ktoré riešia daný problém.
 \section{Výber génov}
-Pri analýze \emph{Evolučnej histórie} nás zaujímajú udalosti ktoré sa v nej odohrali. Veľké množstvo génov v evolučnej histórii môže viesť k neprehľadnosti a nemožnosti udalosť na obrázku identifikovať.
-Z obrázku teda potrebujeme odstrániť prebytočné gény tak, aby sme nestratili informácie o udalostiach ktoré sa v histórii odohrali.
-\paragraph{Pokrytie blokov}
-Gény ktoré zobrazíme budeme vyberať na základe toho, koľko blokov zostane pokrytých.
-Blok považujeme za pokrytý pokiaľ sa v zobrazení nachádza aspoň jeden gén z daného bloku.
-Pokrytie bloku nám zároveň zachová približnú vizuálnu informáciu o tom aká udalosť sa tu odohráva.
-\subsection{Výber génov pomocou Set Coveru}
-Výber takých génov ktoré pokryjú všetky bloky vieme riešiť ako set cover problém.
+Najpodstatnejšou informáciou pri analýze fylogenetického stromu je pre nás to, aké udalosti sa v ňom odohrali. 
+Budeme sa teda snažiť nájsť podmnožinu všetkých génov tak, aby všetky udalosti ostali na obrázku zachované.
+Zvyšné gény následne z obrázku odstránime, čo môže viesť k strate informácií ktoré považujeme za menej podstatné, 
+ako napríklad to, koľko a ktoré geńy sa nachádzajú v danej histórii, ako aj koľko a ktoré gény sú ovplyvné danou udalosťou.
+\subsection{Blok}
+\emph{Blok} predstavuje postupnosť génov ktoré sa pred aj po kroku e.h. nachádzali vedľa seba v rovnakom poradí a jednotlivé gény nemenili svoju orientáciu. Jedná sa teda o súvislý
+úsek DNA ktorý počas kroku e.h. nebol prerušený.
+Ak sa pri delécii alebo inzercii odobralo alebo pridalo viacero génov, a nenachádza sa medzi nimi žiaden iný gén, tvoria jeden blok.
+Pri duplikácii gény tvoria blok ak sa nachádzali pri sebe pred duplikáciou a rovnako aj po nej vo všetkých zduplikovaných inštanciách.
+Pri Inverzii sa gény nachádzajú v bloku pokiaľ sa všetkým zmení orientácia, t.j. zrotuje celý blok.
+Napr blok génov (4,5,-6) bude po inverzii vyzerať ako (6,-5,-4).
+\subsubsection{Pokrytie blokov}
+Blok považujeme za pokrytý pokiaľ sa na obrázku vyskytuje aspoň jeden gén patriaci do daného bloku.
+Pokrytie všetkých blokov jedného kroku e.h nám zaručí zobrazenie všetkých udalostí, aj keď nie v úplnom rozsahu,
+ktoré sa v danom kroku vyskytli.
+Musíme preto nájsť také gény, ktoré pokryjú všetky bloky v kompletnej evolučnej histórii,
+a tým si zaistiť zobrazenie všetkých udalostí vo výslednom fylogenetickom strome. 
+Ako cieľ si zvolíme aby bola daná množina génov čo najmenšia.
+\section{Problém Množinového Pokrytia}
+\paragraph{Definícia}
+Máme dané univerzum$U$, ktoré obsahuje $n$ prvkov, a systém jeho podmnožín \(S=\{ P_i : P_i \subseteq U \}\), 
+ktorý pokrýva celé univerzum \(\cup_{Pi \epsilon S} Pi = U\),
+vybrať čo najmenšiu množinu podmnožín \(C \subseteq S\)
+takú ktorá tiež pokryje celé Univerzum \(\cup_{Pi \epsilon C} Pi = U \) .\\
+Problém Množinového Pokrytia (anglicky Set Cover Problem), ďalej len \emph{PMP}. patrí medzi NP-úplne problémy.%citation
+\paragraph{Príklad}
+Pre Univerzum$U=\{1,2,3,4,5,6\}$ \\a systém jeho podmnožín
+$S=\{\{1,2,3\},\{2,3\},\{3,4\},\{3,4,6\},\{5\}\}$ \\
+je riešením množina podmnožín $C=\{\{1,2,3\},\{3,4,6\},\{5\}\}$ 
+\subsection{Výber génov pomocou Problému Množinového Pokrytia}
+Výber takých génov ktoré pokryjú všetky bloky v celej evolučnej histórii vieme formulovať
+ako Problém Množinového Pokrytia 
 Univerzum predstavuje všetky bloky ktoré sa nachádzajú v našom fylogenetickom strome.
 Každý gén predstavuje jednu podmnožinu, v ktorej sa nachádzajú tie bloky, cez ktoré gén prechádza.
-Riešením je taká množina génov, ktoré dokopy pokrývajú všetky bloky nachádzajúce sa v evolučnej histórii.
-\section{Riešenie Set Cover problému}
+Riešením je taká množina génov, ktorých zjednotenie pokrýva všetky prvky Univerza, v našom prípade všetky bloky nachádzajúce sa v evolučnej histórii.
+\section{Riešenie Problému Množinového Pokrytia}
+Keďže \emph{PMP} patrí medzi NP-ťažké problémy, znamená to že zatiaľ neexistuje,
+a možno nikdy ani nebude existovať algoritmus ktorý by dokázal nájsť riešenie v polynomiálnom čase.
+Potrebujeme sa teda rozhodnúť, či je pre nás výhodnejšie hľadať najlepšie riešenie \emph{PMP} 
+čo môže byť časovo náročné,
+alebo sa uspokojíme s približním riešením, ktoré sme schopný nájsť aproximačným algorimtom v polynomiálnom čase,
+a ktoré môže taktiež predstavovať dostatočné odstránenie prebytočných génov z obrázku.
+Predstavíme si jeden spôsob ktorým budeme hladať úplné riešenie, jeden spôsob na nájdenie približného riešenia a v
+nasledujúcej kapitole porovnáme výsledky ktoré produkujú. 
 \subsection{Greedy algoritmus}
-Greedy algoritmus nám umožnuje v polynomiálnom čase nájsť približné riešenie set cover problému.
-% Peter Slavik A tight analysis of the greedy algorithm for set cover
-\paragraph{Algoritmus} Zoradíme si všetky podmnožiny na základe toho koľko prvkov obsahujú.
-Do riešenia vyberieme najvačšiu podmnožinu, prvky ktoré sa v nej nachádzajú odstránime z Univerza aj zo zvyšných podmnožín, tie opäť zoradíme a postup opakujeme až pokým nieje Univerzum prázdne.
-%ok pseudo code by bol asi lepsi
+Greedy algoritmus patrí medzi najlepšie polynomiálne aproximačné algoritmy pre riešenie \emph{PMP}.\cite{Slavik}
+Greedy algoritmus v každom kroku pridá do riešenia takú podmnožinu,
+ktorá obsahuje najviac zatiaľ nepokrytých prvkov univerza. Riešenie teda hľadáme nasledovným spôsobom:\\
+% Peter Slavik A tight analysis of the greedy algorithm for set cover %citation
+Všetky podmnožiny zoradíme na základe toho, koľko prvkov obsahujú.
+Do riešenia vyberieme najvačšiu podmnožinu a prvky, ktoré sa v nej nachádzajú odstránime z
+univerza aj zo zvyšných podmnožín. Zvyšné podmnožiny opäť zoradíme podľa veľkosti,
+a postup opakujeme až pokým nie je Univerzum prázdne.\\
+Tesná analýza podľa Slavíka ukazuje, že aproximačný koeficient takéhoto riešenia je \(\ln m - \ln \ln m\ +\Theta(1) \) \cite{Slavik} 
+kde \(m = |U|\).
 \subsection{ILP}
 Náš Set Cover problém zapíšeme/pretransformujeme ako \emph{Integer Linear Programming} problém
