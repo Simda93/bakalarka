@@ -31,7 +31,7 @@ Máme dané univerzum$U$, ktoré obsahuje $n$ prvkov, a systém jeho podmnožín
 ktorý pokrýva celé univerzum \(\cup_{Pi \epsilon S} Pi = U\),
 vybrať čo najmenšiu množinu podmnožín \(C \subseteq S\)
 takú ktorá tiež pokryje celé Univerzum \(\cup_{Pi \epsilon C} Pi = U \) .\\
-Problém Množinového Pokrytia (anglicky Set Cover Problem), ďalej len \emph{PMP}. patrí medzi NP-úplne problémy.%citation
+Problém Množinového Pokrytia (anglicky Set Cover Problem), ďalej len \emph{PMP}. patrí medzi NP-úplne problémy.\cite{Karp}
 \paragraph{Príklad}
 Pre Univerzum$U=\{1,2,3,4,5,6\}$ \\a systém jeho podmnožín
 $S=\{\{1,2,3\},\{2,3\},\{3,4\},\{3,4,6\},\{5\}\}$ \\
@@ -62,5 +62,45 @@ univerza aj zo zvyšných podmnožín. Zvyšné podmnožiny opäť zoradíme pod
 a postup opakujeme až pokým nie je Univerzum prázdne.\\
 Tesná analýza podľa Slavíka ukazuje, že aproximačný koeficient takéhoto riešenia je \(\ln m - \ln \ln m\ +\Theta(1) \) \cite{Slavik} 
 kde \(m = |U|\).
-\subsection{ILP}
-Náš Set Cover problém zapíšeme/pretransformujeme ako \emph{Integer Linear Programming} problém
+\subsection{Binárne-Celočíselné Lineárne Programovanie}
+Lineárne programovanie je optimalizačná úloha, pri ktorej je cieľom nájsť minimum alebo
+maximum lineárnej funkcie $f$ s $n$-premennými, zatiaľ čo máme dané lineárne obmedzenia vo forme rovníc a nerovníc.
+V prípade binárneho-celočíselného lineárneho programovania nadobúdajú premenné hodnotu 0 alebo 1,
+a všetky atribúty obmedzujúcich rovníc a nerovníc sú celočíselné.
+Binárne-Celočíselné lineárne programovanie (angl: 0-1/binary integer linear programming),ďalej BILP patrí medzi NP-úplné problémy.\cite{Karp}
+Množstvo iných problémov, ako napríklad Problém obchodného cestujúceho, Problém Vrcholového pokrytia a \emph{PMP} môžu byť formulované ako Celočíselné linárne programovanie.
+Navyše pre Celočíselné lineárne programovanie existuje množstvo 
+\subsubsection{Prevedenie výberu génov na BCLP}
+Všetky gény nachádzajúce sa v našej evolučnej histórii očíslujeme číslom $1-n$, 
+premenná $x_i$ bude nadobúdať hodnotu 0 alebo 1 v závislosti od toho či sa gén pod číslom $i$ nachádza v riešení.
+Lineárna fukncia ktorú cheme minimalizovať bude v tvare $min\ x_1 + x_2 +x_3 + .. +x_n$. Lineárne obmedzenia vytvoríme tak,
+že pre každý blok $B_a$ sa pozrieme na všetky gény ktoré daný blok pokrývajú $x_{ai}:x_{ai} \epsilon B_a$,
+a pridáme podmienku že súčet premmených $x_{ai}$ reprezentujúcich takéto gény musí byť väčší ako 1,
+\( \{x_{a1}+x_{a2}+..+x_{aj} \geq 1|\forall i_{i\epsilon \{1..j\}}:x_{ai}\epsilon B_a \}\),
+to znamená že v riešení sa musí nachádzať aspoň jeden gén pokrývajúci daný blok.
+Vo výslednom \emph{CLP} sa bude nachádzať jedna lineárna funkcia ktorú chceme minimalizovať, tá obsahuje $n$ premenných kde \(n=\text{počet génov}=|S|\).
+Plus $k$ lineárnych obmedzení, kde \(k=\text{počet blokov}=|U|\).
+\paragraph{Riešenie BCLP}
+Cieľom tejto práce nie je nájsť najlepší spôsob,
+alebo zostrojiť najlepší program, pre riešenie \emph{BCLP} či \emph{PMP}.
+Oba problémy sú len prostriedkom ako dosiahnuť optimalizáciu množstva zobrazených génov a tým zvýši prehladnosť.
+V prípade greedy algoritmu sa implementácia nachádza priamo v našom programe,
+čo nám umožnuje v krátkom čas dospieť aspoň k čiastkovej optimalizácii.
+V prípade BCLP náš program nevie nájsť riešenie, ponúka však možnosť vyexportovať sformulovaný \emph{BCLP}.
+Pre samotné riešenie \emph{BCLP} je vhodné použit niektorý z existujúcich nástrojov\cite{wiki}, 
+a riešenie nahrať do nášho programu. pre účely tejto práce bol využívaný IBM ILOG CPLEX Optimization Studio - \emph{CPLEX}
+\subsection{Výsledok optimalizácie}
+Výsledkom optimalizácie génov si môžme ilustrovať na obrázku \ref{obr:opt}.
+Na začiatku dostane náš program evolučnú históriu s kompletnou informáciou, ako vidíme v časti 1).
+Následne zostrojíme všetky bloky a nájdeme riešenie pre daný \emph{PMP}.
+V časti 2) sú gény, ktoré sa nachádzajú v riešení vyznačené farebne, zvyšné gény sú šedé.
+Prebytočné gény z obrázku odstránime. V časti 3) môžme pozorovať, ako sa ich odstránením obrázok preriedi, 
+napriek tomu ostávajú všetky udalosti zachované.
+Časť 4) je finálnym krokom optimalizácie, prebytočné gény už viac nezaberajú žiadne miesto, všetky udalosti zostali zachované,
+nie sme však už schopný určiť ich pôvodný rozsah, ani množstvo génov ktoré sa kedysi nachádzali na obrázku.
+\begin{figure}[t]
+ \centering
+\includegraphics[width=1.1\textwidth]{images/optimalizacia}
+\caption{Kroky optimalizácie}\label{obr:opt}
+\end{figure}
+
