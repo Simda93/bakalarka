@@ -43,4 +43,18 @@ Vnútorné vrcholy predstavujú predchodcov, o ktorých sa predpokladá že sa v
 Pokiaľ je v strome známy posledný spoločný predok, nazveme ho \emph{koreň}, a takýto strom označíme ako \emph{zakorenený}.
 \newline
 V \emph{zakorenenom} strome je zrejmá orientácia vnútorných hrán, ktorá určuje ktorý druh sa vyvinul z ktorého.
-\section{Ostatné pojmy}
+\section{Vizualizácia}
+Vizualizácia je spôsob prevodu dát do grafickej formy, ktorú vieme spracovať naším zrakom, najdominantnejším zmyslom aký máme.
+To nám umožnuje okrem lepšieho pochopenia problému aj rýchlu analýzu a odhalenie existujúcich súvislostí a vzorov ktoré sa nachádzajú vo výsledku.
+\subsection{Iné programy}
+Iné programy použitelné pre vizualizáciu fylogenetických stromov, ako napríklad \emph{phylo.io},\emph{ETE toolkit} alebo \emph{Archaeopteryx} neponúkajú funkcionalitu ktorú potrebujeme.
+Poskytujú vizualizáciu fylogenetických stromov v ktorých gény buď vôbec nevystupujú alebo sa nachádzajú iba pri listoch stromu, 
+nebýva na nich však zobrazený vzťah medzi jednotlivými vrcholmi stromu. Rozdiely zviknú byť vyjadrené číselne ako vzdialenosť genómov. 
+Najväčší dôraz sa kladie na vetvenie a listy stromu, vrcholy nachádzajúce sa vo vnútri stromu slúžia len ako miesta pre rozvetvenie. 
+V našej práci chceme zmeny medzi vrcholmy stromu zobraziť práve pomocou udalostí ktoré sa odohrali. Vetvenie pre nás nieje kľúčové
+\begin{figure}[t]
+ \centering
+\includegraphics[width=0.6\textwidth]{images/sandyna}
+\caption{Výstup z programu Michaely Sandalovej, Zdroj: \cite{biowiki}}\label{obr:sandyna}
+\end{figure}
+Naša práca je nasledovníkom programu Michaely Sandalovej, ktorý zobrazoval preusporiadania postupnosti génov - obrázok \ref{obr:sandyna}.
