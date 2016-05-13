@@ -1,4 +1,5 @@
 \chapter{Problém množinového pokrytia a výber génov}
+\label{chap:setcover}
 V predchádzajúcej kapitole sme si predstavili základné prvky nášho programu ktorý dostane na vstupe súbor, 
 popisujúci evolučnú históriu a na výstupe nám vykreslí fylogenetický strom reprezentujúci danú históriu.
 Problém nastane, pokiaľ v histórii nachádza príliš veľa génov. Výsledný vygenerovaný obrázok sa stáva neprehľadným, 
@@ -11,7 +12,7 @@ Najpodstatnejšou informáciou pri analýze fylogenetického stromu je pre nás 
 Budeme sa teda snažiť nájsť podmnožinu všetkých génov tak, aby všetky udalosti ostali na obrázku zachované.
 Zvyšné gény následne z obrázku odstránime, čo môže viesť k strate informácií ktoré považujeme za menej podstatné, 
 ako napríklad to, koľko a ktoré geńy sa nachádzajú v danej histórii, ako aj koľko a ktoré gény sú ovplyvné danou udalosťou.
-\subsection{Blok}
+\subsection{Blok}\label{blok}
 \emph{Blok} predstavuje postupnosť génov ktoré sa pred aj po kroku e.h. nachádzali vedľa seba v rovnakom poradí a jednotlivé gény nemenili svoju orientáciu. Jedná sa teda o súvislý
 úsek DNA ktorý počas kroku e.h. nebol prerušený.
 Ak sa pri delécii alebo inzercii odobralo alebo pridalo viacero génov, a nenachádza sa medzi nimi žiaden iný gén, tvoria jeden blok.
