@@ -33,5 +33,7 @@ Mnozstvo prvkov a cas ILP riesenia (cas generovania ILP historie/cas behu cplexu
 
 TODO :
 dorobit import emport do XML v settings, napr nonhighlighted color
-
+zmeniť obrázok GUI v práci, dorobiť import ILP riesenia cez command line.
+Nastavovanie gene meta tak ako je popísané v práci.
+Makefile, auto data
 

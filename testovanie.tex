@@ -1,0 +1,93 @@
+\chapter{Porovnanie optimalizačných metód}
+V predchádzajúcej kapitole sme popísali, čo je to problém množinového pokrytia, a
+ako ho vieme využiť pre výber takej sady génov, ktorá nám zobrazí všetky udalosti, ktoré sa odohrali počas evolučnej histórie.
+Náš program obsahuje greedy algoritmus, ktorý nájde približné riešenie daného problému.
+Inou možnosťou je, previesť náš problém množinového pokrytia na celočíselný lineárny program, ktorého vyriešenia nám nájde optimálne riešenie.
+Pre greedy algoritmus poznáme jeho aproximačný koeficient \(\ln m - \ln \ln m\ +\Theta(1) \) \cite{Slavik} 
+kde \(m = |U|\). 
+Všetky próblemy množinového pokrytia, ktoré riešime majú spoločnú črtu, a to že vznikli ako prepis evolučnej histórie.
+Toto špecifikum môže mať vplyv na to, ako blízko k optimálnemu riešeniu sa priblíži greedy algoritmus.
+V tejto kapitole sa budeme venovať tomu, aké sú reálne rozdiely vo výsledkoch medzi aproximáciou a optimálnym riešením.
+Popíšeme spôsob akým testy prebiehajú, pozrieme sa na vyprodukované dáta, a porovnáme výsledky pre greedy algoritmus a celočíselné lineárne programovanie.
+
+\section{Priebeh testovania}
+Priebeh testovania vieme rozdeliť na tri časti. 
+Prvou časťou je vytvorenie vstupných dát, na tento účel slúži pomocný program ktorý vytvorí požadované evolučné histórie.
+Druhým krokom je spracovanie týchto histórii, to znamená vyriešenie problému množinového pokrytia pre každú z nich pomocou 
+greedy algoritmu ako aj pomocou celočíselného lineárneho programovania. Záverečná časť spočíva v zozbieraní získaných dát a ich porovnaní.
+\subsection{Generovanie evolučných histórií}
+\label{sub:generovanie}
+
+\begin{table}[!htb]
+\label{tab:generator}
+\begin{center}
+\begin{tabular}{lcl}
+node\_numb & 10 & \\
+gene\_numb & 10 & \\
+len\_rate & 0.75 & \\
+duplication & 1 & \\ 
+inversion & 1 & \\ 
+deletion & 1 & 3 \\ 
+insertion & 1 & 5 \\ 
+translocation & 1 & \\
+\end{tabular}
+\end{center}
+\caption{Ukážka vstupu pre generátor histórií, settings.generator}
+\end{table}
+
+Pre tento účel sme zostrojili jednoduchý program umožnujúci generovanie evolučných histórií.
+Tento program dostane na vstupe súbor s údajmi ako v tabuľke \ref{tab:generator}. Node\_numb udáva koľko udalostí sa bude vo vygenerovanej histórii nachádzať
+a gene\_numb určuje počet počiatočných génov. Každý krok evolučnej histórie bude obsahovať jednu udalosť, tú umiestnime na náhodné miesto do sekvencie génov,
+jej dĺžku, teda to koľko génov sa v tejto udalosti nachádza vypočítame na základe hodnoty len\_rate. V udalosti s určitosťou ovplyvný jeden gén,
+každý ďalší pridáme s pravdebodobnosťou len\_rate, jedná sa teda o geometrickú postupnosť. To, aká udalosť sa v danom kroku odohrá, určíme náhodne.
+Prvá hodnota za každou udalosťou z tabuľky \ref{tab:generator}, vyjadruje pomer šancí, že sa daná udalosť vyberie. V našom prípade sú udalosťi v pomere 1:1:1:1:1 mali by byť teda zastúpené rovnomerne.
+Pokiaľ niektorú z udalostí v histórii nechceme, nastavíme jej hodnotu 0. Pre inserciu a deléciu vieme navyše nastaviť maximálny počet génov ktoré ovplyvnia, 
+keďže sú to udalosti ktoré menia počet génov v kroku (Duplikácia taktiež mení počet génov, ale vytvára iba kópie, nepridáva žiadne nové gény).
+Pri translokácii gény translokujeme na náhodné miesto.
+Okrem vstupného súboru, môžme generátoru zadať aj počet, koľko histórií má pre dané parametre vytvoriť.
+\paragraph{Spracovanie vygenerovaných histórií}
+Pre všetky vygenerované histórie následne spustíme náš hlavný program, vyexportujeme riešenie problému množinového pokrytia pomocou greedy algoritmu,
+ďalej vyexportujeme formuláciu celočíselného lineárne programu, a jeho riešenie nájdeme pomocou CPLEXu.
+Pre každú históriu si zapamätáme, aké množstvo blokov sme pokrývali a koľko génov sme na to mohli vuyžiť.
+Aký počet z týchto génov bol zvolený do greedy riešenia a aký do optimálneho riešenia CPLEXom.
+Posledným údajom budú časy, čas potrebný pre načítanie evolučnej histórie, čas ktorý potreboval greedy algoritmus pre nájdenie riešenia a čas pri hľadaní optima.
+Pre všetky histórie, ktoré generátor vytvoril z rovnakých nastavení, dáme tieto údaje dokopy. Získame priemerné hodnoty pre dané nastavenia generátora. 
+To nám umožní sledovať vplyv nastavení generátora na výsledky testovania.
+\subsection{Ako zopakovať testovanie ?}
+Ak má čitateľ záujem zopakovať testovanie, tu je návod ako na to.
+K tejto práci, v priečinku \emph{Testovanie} prikladám všetky súbory potrebné pre zopakovanie testovania.
+Konkrétne sú to tri java programy: bak.jar je hlavný program popísaný v tejto práci, spracováva histórie, hľadá greedy riešenie a exportuje zadanie celočíselného lineárneho programu.
+Generator.jar je popísaný v sekcii \ref{sub:generovanie}, na vstup dostáva súbor podobný tomu v tabuľke \ref{tab:generator} a údaj koľko histórií z neho má vytvoriť.
+Pre zadaný vstup $filename.generator$ a počet $n$ vytvorí histórie $filename\#1.history$,$filename\#2.history$ .. $filename\#n.history$.
+TestParser.jar je slúži k spracovaniu údajov pre všetky histórie ktoré vznikli z rovnakých nastavení generátora. Zoradí ich do CVS tabuľky - tabuľka v ktorej sú hodnoty oddelené medzeramy alebo iným znakom, v našom prípade čiarkamy,
+každá história bude v jednom riadku, plus sa tu nachádza riadok $avg$ s priemernými hodnotami.
+Automatizáciu testovania zabezpečuje Linuxový príkaz \emph{make}. Vzťahy medzi súbormy, a spôsob akým \emph{make} vytvára nové súbory je popísaný v súbore \emph{Makefile}.
+Na začiatku musíme existovať súbor $filename.generator$ . Prvé zavolanie príkazu \emph{make} pre každý takýto súbor spustí generátor histórií.
+Údaj o tom, koľko histórií sa vygeneruje pre jedny nastavenia sa nachádza v \emph{Makefile}.
+Druhé zavolanie príkazu \emph{make} pre každú históriu $filename\#i.history$ vytvorenú v predchádzajúcom kroku, nájde greedy riešenia, optimálne riešenia za pomoci CPLEXu,
+a všetky výsledné údaje podstané pre testovanie uloží do súboru $filename\#i.grepped$.
+Tretie zavolanie príkazu \emph{make} pre každý súbor $filename.generator$, z ktorého sme generovali histórie $filename\#1.history$,$filename\#2.history$ .. $filename\#n.history$, vytvorí \emph{filename.data}.
+V tomto súbore sa nachádza tabuľka vytvorená programom \emph{TestParser.jar}.
+
+\begin{table}[!htb]
+\label{tab:generator}
+\begin{center}
+\begin{tabular}{lllllll}
+geny &	udalosti & poradie &velkost Univerza&pocet subsetov greedy &	greedy-cas&	ilp&	ilp-cas \\
+\hline
+10,10,1,32,12,9,0.9400,9,0.9500
+10,10,2,42,20,15,0.9700,15,0.9400
+10,10,3,40,20,14,0.9600,13,1.0000
+10,10,4,30,10,6,0.9400,6,0.9600
+10,10,5,31,11,7,0.9300,7,0.9600
+10,10,6,38,20,16,0.9800,16,0.9500
+10,10,7,38,16,12,0.9400,12,0.9400
+10,10,8,34,16,14,0.9300,13,0.9700
+10,10,9,34,10,10,0.9200,10,0.9100
+10,10,10,37,17,15,0.9000,15,0.9500
+10,10,avg,35.60,15.20,11.80,0.9410,11.60,0.9530
+
+\end{tabular}
+\end{center}
+\caption{Ukážka vstupu pre generátor histórií, settings.generator}
+\end{table}

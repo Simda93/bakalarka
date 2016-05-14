@@ -160,8 +160,10 @@ pokiaľ pre gén neexistujú \emph{GeneMeta}, alebo neobsahujú hodnotu pre pož
 Trieda \emph{Settings} taktiež obsahuje omožnosť vyexportovať nastavenia, vrátane vrátane všetkých \emph{GeneMeta}, do XML, ako aj možnosť nastavenia z XML súboru načítať.
 
 \section{Ovládanie programu}
-Náš program ponúka dve možnosti ako ho ovládať. Prvou z nich je grafická aplikácia ktorá uživateľovi umožnuje interagovať s nastaveniami a spúštať funkcie ktoré náš program obsahuje.
-Druhou možnosťou je vložiť nášmu programu všetky požiadavky, ktoré má splniť v príkazovom riadku už pri jeho spustení, tento spôsob nevyžaduje žiadnu ďalšiu interakciu a je ideálny pri potrebe spracovať väčšie množstvo vstupov.
+Náš program ponúka dve možnosti ako ho ovládať. Prvou z nich je grafická aplikácia ktorá uživateľovi umožnuje interagovať s nastaveniami a 
+spúštať funkcie ktoré náš program obsahuje.
+Druhou možnosťou je vložiť nášmu programu všetky požiadavky, ktoré má splniť v príkazovom riadku už pri jeho spustení,
+tento spôsob nevyžaduje žiadnu ďalšiu interakciu a je ideálny pri potrebe spracovať väčšie množstvo vstupov.
 Teraz sa pozrieme na to aké možsnosti ovládania tieto dve alternatívy ponúnkajú.
 \subsection{Grafická aplikácia}
 \begin{figure}[t]
@@ -247,3 +249,37 @@ Ak je zvýraznený zobrazí sa s farbou ktorú má nastavenú v \emph{Colour}, v
 \emph{Delete gene meta} odstráni záznam \emph{GeneMeta} pre práve zvolený gén.Nefunguje pre \emph{Default}.
 
 \emph{Delete all meta} odstráni všetky existujúce záznamy \emph{GeneMeta} okrem záznamu \emph{Default}.
+
+\subsection{Argumenty príkazového riadku}
+Nie vždy pre nás musí byť výhodnejšie, ovládať náš program cez grafickú aplikáciu. 
+Ako alternatívu ku grafickej aplikácii ponúka náš program možnost, vložiť mu základné parametre potrebné pre jeho beh už pri jeho spustení.
+Program potom sám vykoná zvolené úkony, bez potreby akejkoľvek ďalšej interakcie zo strany uživateľa. 
+Tento spôsob ovládania programu je výhodný napríklad vtedy, keď cheme automatizovať spracovanie väčšieho počtu vstupov.
+Predstavíme si aké argumenty vieme vložiťna príkazový riadok, a aký vplyv budú mať na priebeh nášho programu. 
+Každý argument ktorý týtmto spôsobom programu vložíme má na začiatku pomlčku. Poradie argumentov nie je dôležité.
+
+\emph{-nogui} argument určujúci že náš program nespustí grafickú aplikáciu, ale vystačí si len s údajmi zo vstupu.
+
+\emph{-input:filename.history} argument, ktorým ukážeme na súbor "filename.history"\ obsahujúci evolučnú históriu.
+Evolučná história ktorá sa nachádza v tomto súboré sa načíta do programu.
+
+\emph{-drawsvg} nahraná evolučná história sa vykreslí vo formáte svg do súboru output.svg.
+
+\emph{-svg\_output:filename.svg} miesto súboru output.svg sa obrázok uloží do súboru "filename.svg".
+
+\emph{-opt:x} prebehne optimalizáciu počtu zobrazených génov, číslo x má rovnakú funkciu ako nastavenie \emph{Optimization} z grafickej aplikácie.
+
+\emph{-exportgreedy} do súboru output.greedy uloží greedy riešenie problému množinového pokrytia pre nahranú evolučnú históriu.
+
+\emph{-greedy\_output:filename.svg} miesto do súboru output.greedy sa greedy riešenie uloží do súboru "filename.svg".
+
+\emph{-exportilp} zadanie celočíselného lineárneho programu - \ref{sub:bclp},
+ktorý je ekvivalentný k problému množinového pokrytia pre nahranú evolučnú históriu, sa uloží do súboru output.lp
+
+\emph{ilp\_output:filename.lp} namiesto output.lp sa pre uloženie zadanie celočíselného lineárneho programu využije súbor "filename.lp".
+
+\emph{-load\_lp:input.sol} optimalizuje zobrazené gény na základe riešenia zo súboru ''input.sol".
+Program je nastavený tak aby akceptoval riešenie ktoré prodkuje CPLEX.
+
+\emph{-load\_settings:filename.xml} do triedy \emph{Settings} načítana nastavenia zo súboru ``filename.xml''.
+
