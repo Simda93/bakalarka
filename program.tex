@@ -65,31 +65,8 @@ Napríklad pre gén 2 z riadku e4 vieme, že poradie jeho predchodcu má index 3
 
 \end{description}
 
-\begin{table}[!htb]
-\label{tab:vstup}
-\begin{center}
-\begin{tabular}{llllllll}
-predok & e1 & root & 0 & root & 1 2 1 5 4 3 2 & \#  & -1 -1 -1 -1 -1 -1 -1 \\
-predok & e2 & e1 &  0.05 & dup &  1 2 1 2 5 4 3 2 & \# & 0 1 2 1 3 4 5 6 \\
-clovek & e3 & e2 &  0.12 & sp &   1 2 1 2 5 4 3 2 & \# & 0 1 2 3 4 5 6 7 \\
-clovek & e4 & e3 &  0.13 & del & 1 2 1 2 4 3 2 & \# & 0 1 2 3 5 6 7 \\
-clovek & e5 & e4 &  0.14 & ins & 1 2 1 6 7 2 4 3 2 & \# & 0 1 2 -1 -1 3 4 5 6 \\
-clovek &  e6 & e5 &  0.2 & inv &  1 -1 -2 6 7 2 4 3 2 & \# & 0 2 1 3 4 5 6 7 8 \\
-clovek & e7 & e6 &  0.25 & leaf & 1 -1 -2 6 7 2 4 3 2 & \# & 0 1 2 3 4 5 6 7 8 \\
-simpanz & e8 & e2  & 0.12 & sp &  1 2 1 2 5 4 3 2 & \# & 0 1 2 3 4 5 6 7 \\
-simpanz & e9 & e8 &  0.2 & leaf & 1 2 1 2 5 4 3 2 & \# & 0 1 2 3 4 5 6 7 \\
- \end{tabular}
-
-\end{center}
-\caption{Ukážka vymysleného vstupu v súčasnom formáte \cite{biowiki}}
-\end{table}
-
 \section{Návrh výstupu}
 \label{sec:vykreslene}
-\begin{figure}
-\centerline{\includegraphics[width=1\textwidth]{images/DUP-tube-tree}}
-\caption{Možné zobrazenie histórie, Zdroj:\cite{Vinar2010}}\label{obr:tree}
-\end{figure}
 Výstupom nášho programu by nemal byť iba jednoduchý fylogenetický strom, keďže naším cielom je zobraziť 
 kompletnú informáciu o génoch ktoré sa nachádzajú v evolučnej histórii.
 Potrebujeme preto nájsť spôsob akým túto informáciu pridať do fylogenetického stormu.
@@ -135,9 +112,9 @@ V spodnej vetve sa odohráva inverzia, po nej translokácia, nakoniec delécia d
 \centerline{\includegraphics[width=1\textwidth]{images/udalosti}}
 \caption{Príklad zobrazenia histórie naším programom}\label{obr:events}
 \end{figure}
-\section{Triedy programu}
+\section{Triedy programu EHDraw}
 V stručnosti si predstavíme základne funkcie ktoré plnia triedy v našom programe bez toho, aby sme zachádzali príliš hlboko do implementačných detailov.
-\paragraph{Bak} je hlavnou triedou ktorá sa nachádza v našom programe.
+\paragraph{EHDraw} je hlavnou triedou ktorá sa nachádza v našom programe.
 Načíta vstupné parametre, a na ich záklda sa rozhodne či program prebehne neinteraktívne, iba na základe prvotného vstupu, 
 alebo sa spustí interaktívna grafická aplikáciá využívajúcá JavaFX, ktorá je zapísaná v tejto triede.
 \paragraph{EvolutionTree} je kľúčovou triedou celého projektu, reprezentuje evolučnú históriu, obsahuje výpočty potrebné pre jej vykreslenie ako aj optimalizáciu. Obsahuje podtriedu \emph{EvolutionNode} 
