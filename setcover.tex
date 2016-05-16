@@ -18,23 +18,31 @@ Aby sme formálne zadefinovali problém výberu génov, zavedieme pojem bloku. T
 svoju orientáciu. Jedná sa teda o súvislý
 úsek DNA, ktorý počas kroku nebol prerušený.
 Ak sa pri delécii alebo inzercii odobralo alebo pridalo niekoľko génov, ktoré tvoria súvislý úsek, tvoria jeden blok. 
-Gény naľavo a na pravo od týchto zmazaných resp. vložených génov budú tvoriť ďalšie dva bloky.
+Gény naľavo a napravo od týchto zmazaných resp. vložených génov budú tvoriť ďalšie dva bloky.
 Pri duplikácii gény tvoria blok, ak sa nachádzali pri sebe pred duplikáciou a rovnako aj po nej vo všetkých zduplikovaných inštanciách.
-Pri inverzii tvoria jeden blok gény, ktorým sa zmení orientácia, t.j. Napr blok génov (4,5,-6) bude po inverzii vyzerať ako (6,-5,-4).
+Pri inverzii tvoria jeden blok gény, ktorým sa zmení orientácia. Napr blok génov (4,5,-6) bude po inverzii vyzerať ako (6,-5,-4).
 Ukážka evolučnej histórie so zobrazenými blokmi je na obrázku \ref{obr:bloky},
-v hornej vetve vidíme blok duplikácie, kedy z jedného bloku vznikli dva totožné bloky.
+V hornej vetve vidíme blok duplikácie, kedy z jedného bloku vznikli dva totožné bloky.
 Pre každú vetvu speciácie sa hľadajú bloky medzi predkom a novým druhom zvlášť.
 
-Pre každú dvojicu krok $k$ a jeho predchodca $k_p$, bez ohľadu na to, koľko evolučných udaostí sa medzi nimi odohralo, nájdeme kroky nasledovním spôsobom.
-Každý gén $g_i$ z kroku $k_p$ vložíme do nového bloku $b_gi$, každému génu v bloku $k$, ktorý má predka v bloku $k_p$ priradíme rovnaký blok, ako má jeho predok.
-Ak má gén $-g_i$ z bloku $k$ predka $g_i$ v bloku $k_p$, a $g_i$ má priradený blok $b_gi$, tak génu $-g_i$ priradíme blok $-b_gi$. 
-Génom v $k$ ktoré nemajú predka priradíme nové bloky.
-Každú dvojicu blokov $b1$ a za ním nasledujúci $b2$ z $k_p$ spojíme do jedného bloku ak:
-Blok $b1$ ani $b2$ a ani blok $-b1$ alebo $-b2$ sa nenachádza v kroku $k$, teda došlo k delécii a bloky môžme spojiť.
-Ak sa v kroku $k$ nachádza blok $b1$, vždy za ním nasleduje $b2$, a naopak bloku $b2$ vždy predchádza blok $b1$, tak isto, po bloku $-b2$ musí
-vždy nasledovať $-b1$, a bloku $-b1$ vždy predchádza blok $-b2$ , to nám zaručí že bloky (a teda gény v nich) sa počas udalosti vždy nachádzali vedľa seb.
+Pre každú dvojicu krok $k$ a jeho predchodca $k_p$, bez ohľadu na to, koľko evolučných udalostí sa medzi nimi odohralo, nájdeme bloky nasledovným spôsobom.
+Každý gén $g_i$ z kroku $k_p$ najskôr vložíme do nového bloku $b_{gi}$ a každému génu v bloku $k$, ktorý má predka v bloku $k_p$, priradíme rovnaký blok, ako má jeho predok.
+Ak má gén $-g_i$ z bloku $k$ predka $g_i$ v bloku $k_p$, a $g_i$ má priradený blok $b_{gi}$, tak génu $-g_i$ priradíme blok $-b_{gi}$. 
+Génom v $k$, ktoré nemajú predka, priradíme nové bloky.
+Každú dvojicu blokov $b_1$ a za ním nasledujúci $b_2$ z $k_p$ spojíme do jedného bloku ak platia nasledovné štyri podmienky:
 
-Ked bloky $b1$ a $b2$ spojíme do bloku $b1$ v $k_p$, spoja sa do bloku $b1$ aj v $k$ a bloky $-b2$ a $-b1$ sa spoja do bloku $-b1$ .
+$1)$ za každým výskytom bloku $b_1$ v $k$ nasleduje blok $b_2$.
+
+$2)$ pred každým výskytom bloku $b_2$ v $k$ sa nachádza blok $b_1$.
+
+$3)$ za každým výskytom bloku $-b_2$ v $k$ nasleduje blok $-b_1$.
+
+$4)$ pred každým výskytom bloku $-b_1$ v $k$ sa nachádza blok $-b_2$.
+
+Tieto podmienky nám zaručia že bloky (a teda gény v nich) sa počas udalosti vždy nachádzali vedľa seba.
+Tieto podmienky sú splnené aj v prípade, že oba bloky boli odstránené deléciou.
+
+Keď bloky $b1$ a $b2$ spojíme do bloku $b1$ v $k_p$, spoja sa do bloku $b1$ aj v $k$ a bloky $-b2$ a $-b1$ sa spoja do bloku $-b1$ .
 Týmto spôsobom prechádzame bloky v kroku $k_p$, pokiaľ dochádza k spojeniam blokov. Na strane $k$ potom pospájame susedné bloky,
 ktoré vznikli inzerciou - to sú tie bez predka na strane $k_p$.
 

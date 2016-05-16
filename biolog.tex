@@ -49,7 +49,7 @@ Druhy, ktoré sa nachádzajú na \emph{listoch} stromu, sú buď existujúce dru
 Vnútorné vrcholy predstavujú predchodcov, o ktorých sa predpokladá, že sa vyskytli počas evolúcie. 
 Každý vnútorný vrchol zodpovedá speciácii, kde z jedného druhu vznikajú dva nové druhy.
 Pokiaľ je v strome známy posledný spoločný predok všetkých listov, nazveme ho \emph{koreň}, a takýto strom označíme ako \emph{zakorenený}.
-V \emph{zakorenenom} strome je zrejmá orientácia vnútorných hrán, ktorá určuje, ktorý druh sa vyvinul z ktorého.
+V \emph{zakorenenom} strome je zrejmá orientácia hrán, ktorá určuje, ktorý druh sa vyvinul z ktorého.
 Na obrázku \ref{obr:rooted} vidíme príklad zakoreneného fylogenetického stromu. Prvok \emph{LUCA} predstavuje posledného univerzálneho spoločného predchodcu.
 Na tomto strome vidíme že Eukaryoty a Archeóny sú od seba fylogeneticky menej vzdialené, ako od Baktérií \cite{wiki:phylo}.
 
@@ -61,11 +61,14 @@ To nám umožňuje okrem lepšieho pochopenia problému aj rýchlu analýzu a od
 V oblasti  vizualizácie evolučných histórií je najčastejšie zobrazovanie fylogenetických stromov.
 Na tento účel existuje množstvo programov  ako napríklad \emph{phylo.io}, \emph{ETE toolkit} alebo \emph{Archaeopteryx} \cite{Robinson_2016,Huerta-Cepas2010,archa}.
 Poskytujú vizualizáciu fylogenetických stromov v ktorých gény buď vôbec nevystupujú alebo sa nachádzajú iba pri listoch stromu.
-Rozdiely medzi jednotlivými vrcholmi, sa zvyknú zobrazovať vzdialenosťou týchto vrcholov, alebo číslom, ktoré predstavuje vzdialenosť DNA sekvencií týchto vrcholov. 
-My však cheme, aby sa vo výslednom zobrazení nachádzali jednotlivé udalosti, ktoré sa odohrali počas evolučnej histórie, podobne ako na obrázku \ref{obr:genetree},
-alebo v článku \cite{gorecki2011maximum}. Takéto zobrazenie, v ktorom sa nachádzajú viaceré gény naraz, vidíme na obrázku \ref{obr:tree}, 
-zatiaľ však neexistuje používateľsky pohodlný spôsob, ako ho vytvoriť.
-Náš program by mal umožniť používateľovi, vytvárať podobné obrázky, s pomocou jednoducho ovládateľnej aplikácie.
+Rozdiely medzi jednotlivými vrcholmi sa zvyknú zobrazovať vzdialenosťou týchto vrcholov v obrázku, alebo číslom, ktoré predstavuje vzdialenosť DNA sekvencií týchto vrcholov. 
+My však chceme, aby sa vo výslednom zobrazení nachádzali jednotlivé udalosti, ktoré sa odohrali počas evolučnej histórie.
+Pre rodinu génov, ktoré vznikli duplikáciami a speciáciami z jedného génu v genóme predka sa v literatúre vyskytuje vizualizácia, v ktorej sú vetvy
+fylogenetického stromu zobrazené ako pruhy, vnútri ktorých zobrazíme túto rodinu génov, a udalosti ktoré ju formovali. Príklad vidíme na obrázku 
+\ref{obr:genetree},
+alebo v článku \cite{gorecki2011maximum}. Podobné zobrazenie, v ktorom sa nachádzajú viaceré gény naraz, vidíme na obrázku \ref{obr:tree}, 
+zatiaľ však neexistuje používateľsky pohodlný spôsob, ako podobné vizualizácie vytvoriť.
+Náš program by mal umožniť používateľovi vytvárať podobné obrázky s pomocou jednoducho ovládateľnej aplikácie.
 \begin{figure}[t]
  \centering
 \includegraphics[width=1\textwidth]{images/genetree}
@@ -74,5 +77,5 @@ Náš program by mal umožniť používateľovi, vytvárať podobné obrázky, s
 
 \begin{figure}
 \centerline{\includegraphics[width=1\textwidth]{images/DUP-tube-tree}}
-\caption{Zobrazenie evolučnej histórie viacerých génov naraz,na pozadí sa nachádza druhový strom. Zdroj:\cite{Vinar2010}}\label{obr:tree}
+\caption{Zobrazenie evolučnej histórie viacerých génov naraz, na pozadí sa nachádza druhový strom. Zdroj:\cite{Vinar2010}}\label{obr:tree}
 \end{figure}
