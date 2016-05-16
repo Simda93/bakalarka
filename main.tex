@@ -148,6 +148,8 @@ bez straty pre nás podstatnej informácie - aké mutácie sa odohrali v evoluč
 Redukciu počtu génov transformujeme na Problém množinového pokrytia, jeho aproximáciu získame pomocou greedy algoritmu,
 a jeho optimum pomocou Celočíselného lineárneho programovania. 
 Rozdiely týchto dvoch prístupov porovnávame testami.
+Výsledný program bude slúžiť na zobrazovanie a vizuálnu kontrolu výsledkov metód,
+ktoré sa na základe dostupných DNA sekvencií snažia zrekonštruovať evolučnú históriu, ktorá by viedla k takýmto sekvenciám.  
 
 
 
@@ -162,11 +164,14 @@ greedy algoritmus, Celočíselné lineárne programovanie
 \newpage 
 \section*{Abstract}
 The subject of this work is visualisation of evolution histories.
-Result of this work is program \emph{EHDraw}, which allows creating visualisations.
-changing settings used for creation of those visualisations and automatically reduce number of genes contained in visualisation,
-without loss of relevant information for us - which mutations occurred in evolution history.
-Reduction of the number of genes is transformed onto Set Cover Problem, his approximation is obtained by greedy algorithm and his optimum by Integer Linear Programming
+The Result of this work is program \emph{EHDraw}, which allows creating visualisations and
+changing their settings, It can also automatically reduce the number of genes contained in the visualisation,
+without loss of relevant information for us, namely mutations which occurred in the evolution history.
+Reduction of the number of genes is transformed to the Set Cover Problem, it's approximation is obtained by a greedy algorithm
+and the optimal solution by Integer Linear Programming.
 The differences of these two approaches are compared by tests.
+Created program will allow visual control of the results of the methods, that based on the available DNA sequences
+try to reconstruct the evolutionary history that would lead to such sequences.
 
 
 \paragraph*{Keywords:}  visualisation, evolution history, gene selection, Set Cover Problem,
