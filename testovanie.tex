@@ -50,39 +50,23 @@ keďže sú to udalosti ktoré menia počet génov v kroku (Duplikácia taktiež
 Pri transpozícii gény presunieme na náhodné miesto.
 Okrem vstupného súboru, môžme generátoru zadať aj počet, koľko histórií má pre dané parametre vytvoriť.
 \paragraph{Spracovanie vygenerovaných histórií}
-Pre všetky vygenerované histórie následne spustíme náš hlavný program a vyexportujeme riešenie problému množinového pokrytia 
+Pre všetky vygenerované histórie následne spustíme hlavný program, a vyexportujeme riešenie problému množinového pokrytia 
 pomocou greedy algoritmu.
-Ďalej vyexportujeme formuláciu celočíselného lineárne programu, a jeho riešenie nájdeme pomocou CPLEXu.
-Pre každú históriu si zapamätáme, aké množstvo blokov sme pokrývali a koľko génov sme na to mohli vuyžiť.
+Ďalej vyexportujeme formuláciu celočíselného lineárne programu, a jeho riešenie pomocou CPLEXu.
+Pre každú históriu si zapamätáme, aké množstvo blokov sme pokrývali a koľko génov sa na to mohlo vuyžiť.
 Aký počet z týchto génov bol zvolený do greedy riešenia a aký do optimálneho riešenia CPLEXom.
 Posledným údajom budú časy, čas potrebný pre načítanie evolučnej histórie, čas ktorý potreboval greedy algoritmus pre nájdenie riešenia a čas pri hľadaní optima.
 Pre všetky histórie, ktoré generátor vytvoril z rovnakých nastavení, dáme tieto údaje dokopy. Získame priemerné hodnoty pre dané nastavenia generátora. 
 To nám umožní sledovať vplyv nastavení generátora na výsledky testovania.
 \subsection{Ako zopakovať testovanie ?}
-Ak má čitateľ záujem zopakovať testovanie, tu je návod ako na to.
-K tejto práci, v priečinku \emph{Testovanie} prikladám všetky súbory potrebné pre zopakovanie testovania.
-Konkrétne sú to tri java programy: EHDraw.jar je hlavný program popísaný v tejto práci, spracováva histórie, hľadá greedy riešenie a exportuje zadanie celočíselného lineárneho programu.
-Generator.jar je popísaný v sekcii \ref{sub:generovanie}, na vstup dostáva súbor podobný tomu v tabuľke \ref{tab:generator} a údaj koľko histórií z neho má vytvoriť.
-Pre zadaný vstup $filename.generator$ a počet $n$ vytvorí histórie $filename\#1.history$,$filename\#2.history$ .. $filename\#n.history$.
-TestParser.jar je slúži k spracovaniu údajov pre všetky histórie ktoré vznikli z rovnakých nastavení generátora. Zoradí ich do CVS tabuľky - 
-tabuľka v ktorej sú hodnoty oddelené medzeramy alebo iným znakom, v našom prípade čiarkami,
-každá história bude v jednom riadku, plus sa tu nachádza riadok $avg$ s priemernými hodnotami, tak ako to môžme videť v tabuľke \ref{tab:data}.
-Automatizáciu testovania zabezpečuje Linuxový príkaz \emph{make}. Vzťahy medzi súbormi, a spôsob akým \emph{make} vytvára nové súbory je popísaný v súbore \emph{Makefile}.
-Na začiatku musíme existovať súbor $filename.generator$ . Prvé zavolanie príkazu \emph{make} pre každý takýto súbor spustí generátor histórií.
-Údaj o tom, koľko histórií sa vygeneruje pre jedny nastavenia sa nachádza v \emph{Makefile}.
-Druhé zavolanie príkazu \emph{make} pre každú históriu $filename\#i.history$ vytvorenú v predchádzajúcom kroku, nájde greedy riešenie, optimálne riešenie za pomoci CPLEXu,
-a všetky výsledné údaje podstatné pre testovanie uloží do súboru $filename\#i.grepped$.
-Tretie zavolanie príkazu \emph{make} pre každý súbor $filename.generator$, z ktorého sme generovali histórie $filename\#1.history$,$filename\#2.history$ .. $filename\#n.history$, vytvorí \emph{filename.data}.
-V tomto súbore sa nachádza tabuľka, podobná tabuľke \ref{tab:data}, vytvorená programom \emph{TestParser.jar}.
-Prvý stĺpec je počet génov v kroku ``root'', nasleduje počet udalostí, pravdepodobnosť s akou sme gén pridali, id súboru s históriou, veľkosť univerza,
-počet podmnožín ktorými pokrývame (t.j. počet všetkých génov ktoré sa nachádzajú v histórii),počet prvkov v riešení a čas pre greedy a lineárne programovanie.
-Následné spracovanie dát prebieha manuálne, na základe informácií ktoré poznáme o vstupe pre generátor.
-\begin{table}[!htb]
-\label{tab:data}
+\label{sub:akotestovat}
+
+\begin{table}[t]
+\label{tab:vyslednedata}
 \begin{center}
 %\hspace*{-1cm}
 \begin{tabular}{llllllllll}
-gény&udalosti&p&id&univerzum&subsety&greedy&greedy čas&ilp&ilp čas\\
+udalosti&gény&p&id&univerzum&subsety&greedy&greedy čas&ilp&ilp čas\\
 \hline
 10&10&0.8&1&32&12&9&0.9400&9&0.9500\\
 10&10&0.8&2&42&20&15&0.9700&15&0.9400\\
@@ -99,3 +83,94 @@ gény&udalosti&p&id&univerzum&subsety&greedy&greedy čas&ilp&ilp čas\\
 \end{center}
 \caption{Ukážka získaných dát zo súboru file.data, pre jedny nastavenia generátora file.generator}
 \end{table}
+
+Ak má čitateľ záujem zopakovať testovanie, tu je návod ako na to.
+K tejto práci, v priečinku \emph{Testovanie} prikladám všetky súbory potrebné pre zopakovanie testovania.
+Konkrétne sú to tri java programy: EHDraw.jar je hlavný program popísaný v tejto práci, spracováva histórie, hľadá greedy riešenie a exportuje zadanie celočíselného lineárneho programu.
+Generator.jar je popísaný v sekcii \ref{sub:generovanie}, na vstup dostáva súbor podobný tomu v tabuľke \ref{tab:generator} a údaj koľko histórií z neho má vytvoriť.
+Pre zadaný vstup $filename.generator$ a počet $n$ vytvorí histórie $filename\#1.history$,$filename\#2.history$ .. $filename\#n.history$.
+TestParser.jar je slúži k spracovaniu údajov pre všetky histórie ktoré vznikli z rovnakých nastavení generátora. Zoradí ich do CVS tabuľky - 
+tabuľka v ktorej sú hodnoty oddelené medzeramy alebo iným znakom, v našom prípade čiarkami,
+každá história bude v jednom riadku, plus sa tu nachádza riadok $avg$ s priemernými hodnotami, tak ako to môžme videť v tabuľke \ref{tab:vyslednedata}.
+Okrem týchto troch programov prikladám aj program ToGenerator.jar, vygeneruje súbory *.generator, ktoré boli použité v našom testovaní.
+Automatizáciu testovania zabezpečuje Linuxový príkaz \emph{make}. Vzťahy medzi súbormi, a spôsob akým \emph{make} vytvára nové súbory je popísaný v súbore \emph{Makefile}.
+Na začiatku musíme existovať súbor $filename.generator$ . Prvé zavolanie príkazu \emph{make} pre každý takýto súbor spustí generátor histórií.
+Údaj o tom, koľko histórií sa vygeneruje pre jedny nastavenia sa nachádza v \emph{Makefile}.
+Druhé zavolanie príkazu \emph{make} pre každú históriu $filename\#i.history$ vytvorenú v predchádzajúcom kroku, nájde greedy riešenie, optimálne riešenie za pomoci CPLEXu,
+a všetky výsledné údaje podstatné pre testovanie uloží do súboru $filename\#i.grepped$.
+Tretie zavolanie príkazu \emph{make} pre každý súbor $filename.generator$, z ktorého sme generovali histórie $filename\#1.history$,$filename\#2.history$ .. $filename\#n.history$, vytvorí \emph{filename.data}.
+V tomto súbore sa nachádza tabuľka, podobná tabuľke \ref{tab:vyslednedata}, vytvorená programom \emph{TestParser.jar}.
+Prvý stĺpec je počet krokov ktoré sa odohrali, nasleduje počet génov v kroku ``root'', pravdepodobnosť s akou sme gén pridali, id súboru s históriou, veľkosť univerza,
+počet podmnožín ktorými pokrývame (t.j. počet všetkých génov ktoré sa nachádzajú v histórii),počet prvkov v riešení a čas pre greedy a lineárne programovanie.
+Následné spracovanie dát prebieha manuálne, na základe informácií ktoré poznáme o vstupe pre generátor.
+
+\subsection{Výsledky testovania}
+Dáta, ktoré analyzujeme, sme získali postupom uvedením v v sekcii \ref{sub:akotestovat}.
+Jedná sa o celkovo 475 rôznych vstupných súborov $*.data$, v tomto súbore je každý riadok jedna evolučná história, my budeme pracovať s riadkami ``avg'', 
+v ktorých sa nachádzajú priemerné hodnoty pre tieto histórie.
+Pokúsim sa uviesť niekoľko výsledkov, ktoré sú podstatné pre túto prácu.
+
+\begin{figure}[h]
+ \centering
+\includegraphics[width=1\textwidth]{images/cas}
+\caption{Pomer času greedy a clp, pri hľadaní riešenia}\label{obr:cas}
+\end{figure}
+
+
+V kapitole \ref{chapter:setcover}, sa spomína, že greedy algoritmus nájde aproximáciu NP-ťažkého problému množinového pokrytia v polynomiálnom čase.
+Preskúmame, či greedy algoritmus predstavuje časovú úsporu, a ak áno ako významnú.
+Na obrázku \ref{obr:cas} vidíme pomer času potrebného pre riešenie greedy, vzhľadom k času potrebnému pre riešenie pomocou Celočíselného lineárneho programu.
+Záznamy sú na osi $x$ zoradené vzostupne podľa toho, koľko času potreboval greedy algoritmus spolu s Celočíselným lineárnym programovaním (CLP) pre nájdenie riešenia.
+Pri krátkych vstupoch nájdeme riešenie rýchlejšie s \emph{CLP}, než s greedy algoritmom, zhruba v polovici záznamov sa tento pomer začína meniť. 
+Pri najkrajnejších záznamoch, ktoré vidíme aj v tabuľke \ref{tab:vyslednedata}, dostávame pre greedy a \emph{CLP} veľmi nesúrodé časy.
+Pokiaľ preskúmame časy, pre jednotlivé histórie v pozadí týchto záznamov, zistíme, že väčšina času pri riešení \emph{CLP} bola využitá programom EHDraw na načítanie histórie a vytvorenie
+celočíselného lineárneho programu. \emph{CPLEXu} pre takéto histórie, ktoré sú aj po optimalizácii príliš rozsiahle na zobrazenie naším programom,
+stačil na nájdenie riešenia iba zlomok z celkového času.
+
+\begin{table}[t]
+
+\label{tab:data}
+\begin{center}
+%\hspace*{-1cm}
+\begin{tabular}{llllllll}
+poradie&udalosti&gény&p&univerzum&subsety&greedy čas&ilp\\
+\hline
+1&10&10&0.9&22.3&10&0.75&0.75\\
+2&10&10&0.7&24.6&10&0.759&0.757\\
+.\\
+80&100&10&0.9&225.4&10&0.949&0.979\\
+81&10&50&0.7&38.5&55.9&1.063&0.87\\
+.\\
+407&200&100&0.97&3060.3&1440.4&11.234&11.443\\
+408&100&500&0.95&298.4&500&12.136&10.834\\
+.\\
+472&200&500&0.97&5609.5&5709.75&64.88&90.0225\\
+473&200&500&0.97&594.67&500&74.6933&81.7333\\
+474&200&500&0.97&596.9&500&86.937&82.496\\
+475&200&50&0.97&593.1&50&129.09&65.178\\
+\end{tabular}
+\end{center}
+\caption{Vybraných 10 zo 475 riadkov ``avg'', zoradené sú podla súčtu času greedy a ilp. }
+\end{table}
+
+Druhou vlastnosťou greedy algoritmu ktorá nás zaujíma je, vzdialenosť jeho riešení od optima.
+
+Graf na obrázku \ref{obr:greedy} je zostrojený zo záznamov $all*.data$, v tých sa nachádzajú dáta z histórií,
+v ktorých boli povolené všetky udalosti. Na osi $x$ sa nachádza pomer medzi medzi množstvom blokov, ktoré musíme pokryť, a počtom génov,
+s ktorými tieto bloky pokrývame. Modrá čiara \emph{greedy \%} vyjadruje percentuálne, 
+aký počet génov sa nachádza v greedy riešení vzhľadom na optimum, odčítavame ju z hodnôt na ľavej strane. Žltá čiara \emph{greedy avg} je priemerná hodnota tohto údaju,
+$greedy\ avg=100.177437\%$, odčítavame ju z hodnôt na ľavej strane. Oranžová čiara \emph{clp \%} udáva, aké percento z génov sa nachádza v optimálnom riešení,
+odčítavame ju z hodnôt na pravej strane. 
+S pomocou \emph{clp \%} vidíme, že pokiaľ máme príliš veľa blokov, vzhľadom k počtu génov, využijeme pri riešení problému množinového pokrytia väčšinu génov.
+V takom prípade prestáva byť optimalizácia efektívna, a aproximácia sa približuje k optimu, lebo obe riešenia potrebujú vybrať skoro všetky gény.
+Naopak, pokiaľ si optimum postačí s malou časťou génov, narastá priestor pre odchýlku aproximácie od optima.
+Z grafu ďalej vidíme, že aproximácia je v zaznamenanom maxime 101.74\% a priemerne 100.18\%.
+Táto odchýlka aproximácie od ptima sa v praxi, t.j. pri evolučných históriách, ktoré sú zobraziteľné naším programom, prejaví rozdielom ktorý je zanedbateľný.
+
+
+\begin{figure}[h]
+ \centering
+\includegraphics[width=1\textwidth]{images/greedy}
+\caption{Graf zobrazujúci aké percento génov sa nachádza v optimálnom riešení, v závislosti od priemerného počtu unikátnych blokov na jeden gén. (pre 10 blokov a 100 génov pripadá 0.1 bloku na gén)
+V grafe sa nachádza aj údaj o tom, ako ďaleko od tohto optima je aproximácia.}\label{obr:greedy}
+\end{figure}
