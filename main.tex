@@ -141,16 +141,18 @@ Fakulta matematiky, fyziky a informatiky
 \newpage 
 \section*{Abstrakt}
 
-Počas evolúcie dochádza v DNA k lokálnym mutáciám, 
-ktoré menia jeden alebo niekoľko susedných nukleotidov, 
-ale aj k väčším zmenám, ktoré menia poradie alebo počet výskytov dlhších oblastí.
-Cieľom práce je implementovať systém na vizualizáciu evolučnej histórie jednej 
-alebo viacerých DNA sekvencií s dôrazom na tieto väčšie zmeny. Samotná história 
-je daná na vstupe a cieľom je zobraziť ju tak, aby sa dali prehľadne sledovať jednotlivé
-mutácie a tiež vzťahy rôznych častí sekvencie.
+Táto práca sa venuje zobrazovaniu evolučných histórií. 
+Výsledkom tejto práce je program \emph{EHDraw}, ktorý umožňuje vytvárať vizualizácie, 
+meniť nastavenia použité pre tvorbu týchto vizualizácií a automaticky zredukovať počet génov, ktoré sa nachádzajú vo vizualizácii,
+bez straty pre nás podstatnej informácie - aké mutácie sa odohrali v evolučnej histórii. 
+Redukciu počtu génov transformujeme na Problém množinového pokrytia, jeho aproximáciu získame pomocou greedy algoritmu,
+a jeho optimum pomocou Celočíselného lineárneho programovania. 
+Rozdiely týchto dvoch prístupov porovnávame testami.
 
 
-\paragraph*{Kľúčové slová:} vizualizácia,evolučná história,poradie génov
+
+\paragraph*{Kľúčové slová:} vizualizácia, evolučná história, výber génov, Problém množinového pokrytia,
+greedy algoritmus, Celočíselné lineárne programovanie
 % --- Koniec Abstrakt - Slovensky
 
 
@@ -159,12 +161,16 @@ mutácie a tiež vzťahy rôznych častí sekvencie.
 % -------------------
 \newpage 
 \section*{Abstract}
+The subject of this work is visualisation of evolution histories.
+Result of this work is program \emph{EHDraw}, which allows creating visualisations.
+changing settings used for creation of those visualisations and automatically reduce number of genes contained in visualisation,
+without loss of relevant information for us - which mutations occurred in evolution history.
+Reduction of the number of genes is transformed onto Set Cover Problem, his approximation is obtained by greedy algorithm and his optimum by Integer Linear Programming
+The differences of these two approaches are compared by tests.
 
-Abstract in the English language (translation of the abstract in the
-Slovak language).
 
-
-\paragraph*{Keywords:} 
+\paragraph*{Keywords:}  visualisation, evolution history, gene selection, Set Cover Problem,
+greedy algorithm, Integer Linear Programming
 
 % --- Koniec Abstrakt - Anglicky
 
