@@ -4,7 +4,7 @@
 Cieľom tejto práce bolo implementovať systém na vizualizáciu evolučných histórií, s dôrazom na zmeny, ktoré sa v nich odohrali.
 Výsledkom je program EHDraw ktorý umožňuje jednoduchú manipuláciu za pomoci grafickej aplikácie.
 Určený je najmä pre vedeckých pracovníkov, ktorý sa zaoberajú problémami z oblasti biológie a bioinformatiky,
-konkrétne rekonštrukciou DNA sekvence alebo celého fylogenetického stromu. 
+konkrétne rekonštrukciou DNA sekvencie alebo celého fylogenetického stromu. 
 Ponúka im jednoduchú vizuálnu kontrolu ich práce, ako aj možnosť prezentovať svoje výsledky formou, ktorá dokáže osloviť širšie publikum.
 Za týmto účelom umožňuje náš program zmenu veľkého počtu nastavení, používateľ získava kontrolu nad vzhľadom vyprodukovanej vizualizácie.
 S dôrazom na zobrazenie všetkých zmien, riešime aj problém výberu génov. Jeho cieľom je nájsť takú sadu génov,
@@ -20,4 +20,19 @@ Najväčšie množstvo času,pri najväčších testovaných históriách oba al
 zo vstupu trvalo niekoľko krát dlhšie než jeho vyriešenie CPLEXom.
 Na druhú stranu, riešenia ktoré nachádzal greedy boli iba málo rozdielne od optím. V praxi to znamená jeden alebo dva gény naviac v zobrazení.
 
-Táto práca nerieši všetky problémy súvisiace so zobrazovaním evolučných histórií, 
+Táto práca nerieši všetky problémy, ktoré majú súvis so zobrazovaním evolučných histórií. Námetov na úpravu existujúceho programu je hneď niekoľko.
+
+Nájsť spôsob, akým vrátime informáciu, odstránenú spolu s génmi naspäť do zobrazenia. Síce pri našom odstránení génu nestrácame informáciu o tom, 
+aké udalosti sa odohrali v evolučnej histórii, strácame údaje o počte a zoradení génov v jednotlivých krokoch a udalostiach.
+
+Pridať do zobrazenia informácie, ktoré sa v ňom momentálne nenachádzajú. Napríklad pokiaľ dochádza v evolučnej histórii k speciáciám, 
+mohol by nás zaujímať druhový strom nachádzajúci sa na jej pozadí. Alebo podrobnejšie údaje o jednotlivých génoch a o tom,
+ako sa počas evolúcie menila ich štruktúra.
+
+Prispôsobiť program tak, aby vizualizoval aj evolučné histórie, ktoré sledujú sekvencie DNA na viacerých chromozómoch. 
+To by vyžadovalo vyriešiť problém usporiadania viacerých chromozómov a rozrezávania cirkularnych chromozómov.
+
+Zmeniť spôsob akým náš program zobrazuje evolučné histórie tak, aby sa všetky udalosti nachádzali aj v novom zobrazení.
+Do úvahy pripadá napríklad animácia na základe času alebo zobrazovanie v $3D$ priestore.
+
+Pokiaľ vás niektorý z týchto cieľov oslovil, zdrojové súbory k existujúcej práci sa dajú nájsť aj na stránke $https://github.com/Simda93/bak$.
