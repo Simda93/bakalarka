@@ -1,4 +1,23 @@
 \chapter*{Záver}
 \addcontentsline{toc}{chapter}{Záver}
 
-Cieľom tejto práce bolo zostrojiť program, ktorý používateľovi umožní vykreslovanie evolučných histórií.
+Cieľom tejto práce bolo implementovať systém na vizualizáciu evolučných histórií, s dôrazom na zmeny, ktoré sa v nich odohrali.
+Výsledkom je program EHDraw ktorý umožňuje jednoduchú manipuláciu za pomoci grafickej aplikácie.
+Určený je najmä pre vedeckých pracovníkov, ktorý sa zaoberajú problémami z oblasti biológie a bioinformatiky,
+konkrétne rekonštrukciou DNA sekvence alebo celého fylogenetického stromu. 
+Ponúka im jednoduchú vizuálnu kontrolu ich práce, ako aj možnosť prezentovať svoje výsledky formou, ktorá dokáže osloviť širšie publikum.
+Za týmto účelom umožňuje náš program zmenu veľkého počtu nastavení, používateľ získava kontrolu nad vzhľadom vyprodukovanej vizualizácie.
+S dôrazom na zobrazenie všetkých zmien, riešime aj problém výberu génov. Jeho cieľom je nájsť takú sadu génov,
+ktoré môžme zo zobrazenia odstráni bez toho, aby sme stratili informáciu o udalostiach v evolučnej histórií.
+Odstránenie niektorých génov má uľahčiť nájdenie podstatnej informácie na obrázku.
+Takúto sadu génov nájdeme pomocou Problému množinového pokrytia, 
+pre jeho vyriešenie môžme využiť buď greedy algoritmus alebo Celočíselné lineárne programovanie.
+Pri Celočíselnom lineárnom programovaní máme záruku nájdenia optima, zatiaľčo greedy hľadá aproximáciu.
+Praktickými testami sme overovali či greedy algoritmus predstavuje časovú úsporu, a o koľko horšie riešenie od optima vyhľadá.
+Prvotné predpoklady že greedy algoritmus nájde riešenie v kratšom čase sa nepotvrdili, v niektorých prípadoch bol greedy rýchlejší,
+ale pri optimalizácii histórií, ktoré sú dosť malé na to, aby sme ich zobrazovali, nebudú takéto rozdiely v čase podstatné.
+Najväčšie množstvo času,pri najväčších testovaných históriách oba algoritmy strávili v programe EHDraw, ktorému vygenerovanie lineárneho programu 
+zo vstupu trvalo niekoľko krát dlhšie než jeho vyriešenie CPLEXom.
+Na druhú stranu, riešenia ktoré nachádzal greedy boli iba málo rozdielne od optím. V praxi to znamená jeden alebo dva gény naviac v zobrazení.
+
+Táto práca nerieši všetky problémy súvisiace so zobrazovaním evolučných histórií, 
