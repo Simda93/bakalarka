@@ -9,7 +9,7 @@ ako nastavenia programu.
 \label{sec:vstup}
 
 \begin{table}[!htb]
-\label{tab:vstup}
+
 \begin{center}
 \begin{tabular}{llllllll}
 predok & e1 & root & 0 & root & 1 2 1 5 4 3 2 & \#  & -1 -1 -1 -1 -1 -1 -1 \\
@@ -24,7 +24,7 @@ simpanz & e9 & e8 &  0.2 & leaf & 1 2 1 2 5 4 3 2 & \# & 0 1 2 3 4 5 6 7 \\
  \end{tabular}
 
 \end{center}
-\caption{Ukážka vymysleného vstupu v súčasnom formáte.}
+\caption{Ukážka vymysleného vstupu v súčasnom formáte.}\label{tab:vstup}
 \end{table}
 
 Vstupom do nášho programu je evolučná história, ktorá popisuje poradie génov v jednotlivých krokoch, a aké
@@ -129,7 +129,7 @@ V spodnej vetve sa odohráva inverzia, po nej transpozícia a nakoniec delécia 
 \section{Triedy programu EHDraw}
 V stručnosti si predstavíme základne funkcie, ktoré plnia triedy v našom programe.
 \paragraph{EHDraw} je hlavnou triedou nášho programu.
-Načíta vstupné parametre, a na ich záklde sa rozhodne či program prebehne neinteraktívne, iba na základe prvotného vstupu, 
+Načíta vstupné parametre, a na ich základe sa rozhodne či program prebehne neinteraktívne, iba na základe prvotného vstupu, 
 alebo sa spustí interaktívna grafická aplikácia využívajúca JavaFX, ktorá je zapísaná v tejto triede.
 \paragraph{EvolutionTree} je kľúčovou triedou celého projektu, reprezentuje evolučnú históriu,
 obsahuje výpočty potrebné pre jej vykreslenie ako aj optimalizáciu.
@@ -162,17 +162,17 @@ Históriu v tomto formáte vieme následne vyexportovať do súboru. Export je f
 a tiež možnosť načítať takéto nastavenia z XML súboru.
 \paragraph{Settings} V tejto triede sa nachádzajú globálne nastavenia ktoré využívame
 pre vykresľovanie. Sú tu uložené aj \emph{GeneMeta} pre niektoré gény.
-pokiaľ pre gén neexistuje \emph{GeneMeta}, alebo neobsahujú hodnotu pre požadované nastavenie, 
+Pokiaľ pre gén neexistuje \emph{GeneMeta}, alebo neobsahujú hodnotu pre požadované nastavenie, 
 využije sa všeobecná hodnota tohto nastavenia, ktorá sa nachádza v triede \emph{Settings}.
-Trieda \emph{Settings} taktiež obsahuje možnosť vyexportovať nastavenia, vrátane vrátane všetkých 
+Trieda \emph{Settings} taktiež obsahuje možnosť vyexportovať nastavenia, vrátane všetkých 
 \emph{GeneMeta}, do XML súboru, ako aj možnosť nastavenia z XML súboru načítať.
 
 \section{Ovládanie programu}
-Náš program ponúka dve možnosti ako ho ovládať. Prvou z nich je grafická aplikácia ktorá používateľovi 
+Náš program ponúka dve možnosti ovládania. Prvou z nich je grafická aplikácia, ktorá používateľovi 
 umožňuje interagovať s nastaveniami a 
-spúšťať funkcie ktoré program obsahuje.
-Druhou možnosťou je vložiť programu všetky požiadavky, ktoré má splniť v príkazovom riadku
-už pri jeho spustení, tento spôsob nevyžaduje žiadnu ďalšiu interakciu a je ideálny pri potrebe
+spúšťať funkcie, ktoré program obsahuje.
+Druhou možnosťou je vložiť programu všetky požiadavky, ktoré má splniť, v príkazovom riadku
+už pri jeho spustení. Tento spôsob nevyžaduje žiadnu ďalšiu interakciu a je ideálny pri potrebe
 spracovať väčšie množstvo vstupov.
 Teraz sa pozrieme na to aké možnosti ovládania tieto dve alternatívy ponúkajú.
 \subsection{Grafická aplikácia}
@@ -182,49 +182,50 @@ Teraz sa pozrieme na to aké možnosti ovládania tieto dve alternatívy ponúka
 \caption{Vzhľad grafickej aplikácie}\label{obr:gui}
 \end{figure}
 
-Na obrázku \ref{obr:gui} vidíme základné okno našej aplikácie. V strede sa nachádza plocha na ktorú sa 
-vykresľuje evolučná história. Na ľavo sa nachádza sada tlačidiel a na pravo ovládacie prvky pre zmenu nastavení.
-Pri spustení má aplikácia rozmery 1200x800 a plocha, na ktorú sa vykresľuje rozmery 800x800.
-\paragraph{Tlačidlá na ľavej strane} slúžia k základnému ovládaniu nášho programu, popíšeme čo ktoré tlačidlo po stlačení vykoná,
-a aké to má využitie.
+Na obrázku \ref{obr:gui} vidíme základné okno našej aplikácie. V strede sa nachádza plocha, na ktorú sa 
+vykresľuje evolučná história. Naľavo sa nachádza sada tlačidiel a napravo ovládacie prvky na zmenu nastavení.
+Pri spustení má aplikácia rozmery 1200x800 a plocha, na ktorú sa vykresľuje, rozmery 800x800.
+\paragraph{Tlačidlá na ľavej strane} slúžia k základnému ovládaniu nášho programu.
 
-\emph{Open} otvorí nové okno ktoré nám umožní zvoliť súbor, ktorý chceme otvoriť, tento súbor by mal byť vo formáte popísanom v sekcii \ref{sec:vstup}. 
+\emph{Open} otvorí nové okno, ktoré nám umožní zvoliť súbor, ktorý chceme otvoriť. Tento súbor by mal byť vo formáte popísanom v sekcii \ref{sec:vstup}. 
  Zvolená evolučná história sa načíta a vykreslí. 
  
-\emph{Save Img} otvorí nové okno, ktoré nám umožní zvoliť si do akého súboru sa uloží náš súčasný obrázok, ten sa ukladá vo formáte SVG.
+\emph{Save Img} otvorí nové okno, ktoré nám umožní zvoliť si, do akého súboru sa uloží náš súčasný obrázok, vo formáte SVG.
 
-\emph{Import Settings} v novom okne nám umožní vybrať si súbor vo formáte XML obsahujúci nastavenia, ktoré má načítať.
+\emph{Import Settings}  nám umožní vybrať si súbor vo formáte XML obsahujúci nastavenia, ktoré má načítať.
 
-\emph{Export Settings} umožňuje vybrať súbor do ktorého sa uložia naše nastavenia. Nastavenia sa ukladajú vo formáte XML.
+\emph{Export Settings} umožňuje vybrať súbor, do ktorého sa uložia naše nastavenia. Nastavenia sa ukladajú vo formáte XML.
 
-\emph{Optimize} zostrojí problém množinového pokrytia tak ako je to popísané v kapitole \ref{chap:setcover}
-a následne nájde jeho približné riešenie pomocou greedy algoritmu.
+\emph{Optimize} rieši problém výberu génov, ktorému sa budeme venovať v kapitole \ref{chap:setcover}.
+Cieľom je vybrať podmnožinu génov a ostatné gény zobraziť menej výrazné alebo vôbec.
+Konkrétne používa približné riešenie pomocou greedy algoritmu.
 Podla toho akú hodnotu má pole \emph{optimization} sa toto riešenie prenesie do zobrazenia.
 
-\emph{Export ILP} podobne ako tlačidlo \emph{Optimize} zostrojí problém množinového pokrytia, 
-a ten uloží zapísaný ako celočíselný lineárny program, do nami zvoleného súboru.
+\emph{Export ILP} podobne ako tlačidlo \emph{Optimize} súvisí s výberom génov.
+ale miesto toho aby našiel jeho približné riešenie, uloží ho zapísaný ako celočíselný
+lineárny program do nami zvoleného súboru.
 
-\emph{Import ILP} v novom oknem nám umožní zvoliť súbor, ktorý sa otvorí, tento súbor obsahouje riešenia celočíselného lineárneho programu.
- Náš program je nastavený tak aby vedel spracovať riešenia ktoré produkuje \emph{CPLEX}, to akým spôsobom sa načítané riešenie prenesie do 
- zobrazenia evolučnej histórie, závisí od toho, aká hodnota sa nachádza v poli \emph{optimization}.
+\emph{Import ILP} nám umožní zvoliť súbor, ktorý obsahuje riešenie celočíselného lineárneho programu, nájdené programom \emph{CPLEX}.
+Načítané riešenie sa opäť prenesie do zobrazenia evolučnej histórie.
  
-\emph{Redraw} po stlačení tohto tlačidla dôjde k prekresleniu obrázku.
-\paragraph{Ovládacie prvky na pravej strane}
-Na pravej strane sa nachádzajú dve sady ovládacích prvkov. Prvá sada mení nastavenia ktoré sa 
+\emph{Redraw} umožnuje prekresliť obrázok.
+\paragraph{Ovládacie prvky na pravej strane}.
+Na pravej strane sa nachádzajú dve sady ovládacích prvkov. Prvá sada mení nastavenia, ktoré sa 
 nachádzajú priamo v triede \emph{Settings} a sú zdielané všetkými génmi a celým prostredím.
 Druhá sada mení nastavenia špecificky pre zvolený gén, je to teda spôsob akým meníme nastavenia triedy
 \emph{GeneMeta} pre konkrétny gén.
-\paragraph{Globálne}\mbox{}\linebreak
-\emph{Time diff}je číslo vyjadrujúce koľko času má zabrať zobrazenie udalosti na X-ovej osi, 
-ak má krok evolučnej histórie $k$ známy čas $t_k$ tak 
-jeho udalosť sa začne odohrávať už v čase $t_k - \emph{Time diff}$, tento čas však nesmie byť menší ako čas
+\paragraph{Globálne nastavenia}\mbox{}\linebreak
+\emph{Time diff}je číslo vyjadrujúce koľko času má zabrať zobrazenie udalosti na osi $x$. 
+Ak má krok evolučnej histórie $k$ uvedený čas $t_k$, tak 
+jeho udalosť sa začne odohrávať už v čase $t_k - \emph{Time diff}$. Tento čas však nesmie byť menší ako čas
 v ktorom sa odohral predchodca kroku $k$. Time diff reprezentuje rovnakú premennú ako znak $d$ v sekcii 
 \ref{sec:vykreslene}. 
 
-\emph{Width} určuje dĺžku osi $x$, teda šírku obrázku, náš program každú evolučnú históriu naškáluje tak, aby ležala na celej tejto osi.
+\emph{Width} určuje dĺžku osi $x$, teda šírku obrázku. Náš program každú evolučnú históriu naškáluje tak, aby ležala na celej tejto osi.
 Zadáva sa celé číslo.
 
-\emph{Height} určuje dĺžku osi $y$, teda výšku obrázku, náš program na šírku neškáluje, to aká časť šírky je pokrytá závisí od šírok génov a ich medzier.
+\emph{Height} určuje dĺžku osi $y$, teda výšku obrázku. Náš program na výšku neškáluje. 
+To aká časť šírky je pokrytá závisí od šírok génov a ich medzier.
 Zadáva sa celé číslo.
 
 \emph{Node Gap} určuje vzdialenosť medzi dvoma sadami vetiev, ktoré vznikli počas speciáce.
@@ -232,71 +233,71 @@ Zadáva sa celé číslo.
 
 \emph{Line Gap} určuje medzeru medzi dvoma susednými génmi, ktoré sa nachádzajú v jednom kroku evolučnej histórie.Zadáva sa celé číslo.
 
-\emph{Line Size} šírka čiary jedného génu, platí pre všetky gény, pokiaľ nemajú svoje vlastné špecifické nastavenie.Zadáva sa celé číslo.
+\emph{Line Size} určuje šírku čiary znázorňujúcej jeden gén, platí pre všetky gény, pokiaľ nemajú svoje vlastné špecifické nastavenie.Zadáva sa celé číslo.
 
-\emph{Saturation} a \emph{Brightness} nastavenie sýtosti a jasu farieb.
-Farby génom priraďujeme z modelu HSB - hue,saturation,brightness - slovensky odtieň,sýtosť,jas.
+\emph{Saturation} a \emph{Brightness} nastavuje sýtost a jas farieb.
+Farby génom priraďujeme z modelu HSB - hue, saturation, brightness - slovensky odtieň, sýtosť, jas.
 Odtieň v tomto modeli je daný v stupňoch hodnotou $0^\circ-360^\circ$. To nám umožňuje rovnomerne rozdeliť odtiene medzi $n$ génov.
 Sýtosť a jas sú potom pre všetky gény rovnaké, určujeme ich reálnym číslo z rozmedzia $<0,1>$ . 
 
 
-\emph{Optimization} určuje akým spôsob sa prejaví optimalizácia na výslednom zobrazení evolučnej histórie.
-Pri hodnote 2 sa génom, ktoré sa nenachádzajú v riešení nastaví atribút $higlighted=false$, vykreslia sa farbou ktorá je daná ako
-\emph{Non highlighted}, takéto nastavenie vidíme na obrázku \cite{obr:opt} v okienku číslo 2.
-Pri hodnote 1 sa nezvolením génom nastaví atribút $trasnparent=true$, zobrazia sa priesvitne, rovnako ako v okienku číslo 3.
-Pri hodnote 0 sa nezvolením génom nastaví atribút $draw=false$, a teda sa nezobrazia vôbec, rovnako ako štvrtom okienku.
+\emph{Optimization} určuje, akým spôsob sa prejaví výber génov na výslednom zobrazení evolučnej histórie.
+Pri hodnote 2 sa génom, ktoré sa nenachádzajú v riešení, nastaví atribút $higlighted=false$. Vykreslia sa farbou, ktorá je daná ako
+\emph{Non highlighted}. Takéto nastavenie vidíme na obrázku \cite{obr:opt} v okienku číslo 2.
+Pri hodnote 1 sa nezvoleným génom nastaví atribút $transparent=true$, zobrazia sa teda priesvitne, rovnako ako v okienku číslo 3.
+Pri hodnote 0 sa nezvoleným génom nastaví atribút $draw=false$, a teda sa nezobrazia vôbec, rovnako ako vo štvrtom okienku.
+Génom, ktoré sa nachádzajú v riešení, sa atribúty nemenia ani v jednom týchto nastavení.
 
 \emph{Non highlighted} umožňuje výber farby pre gény, ktoré nie sú zvýraznené.
-To sú tie pre ktoré $highlighted=false$ a zároveň $draw=true$ a $transparent=false$. Tieto hodnoty génom manuálne nastavíme
+To sú tie, pre ktoré $highlighted=false$ a zároveň $draw=true$ a $transparent=false$. Tieto hodnoty génom manuálne nastavíme
 alebo ich získajú pokiaľ sa nenachádzajú v riešení optimalizácie a $optimization=2$.
 
-\emph{Redraw} je prepínač, pokiaľ je zapnutý, obrázok sa automaticky prekreslí po tom, čo zmeníme niektoré z jeho nastavení. 
+\emph{Redraw} je prepínač. Pokiaľ je zapnutý, obrázok sa automaticky prekreslí po tom, čo zmeníme niektoré z jeho nastavení. 
 V opačnom prípade obrázok prekreslíme stlačením ľavého tlačidla \emph{Redraw}.
-\paragraph{Špecifické pre gén} sa aplikujú na vybraný gén ktorý zvolíme zo zoznamu.
-V tomto zozname sa nachádzajú všetky gény z histórie, bez ohľadu na to, či pre ne existuje záznam \emph{GeneMeta} uložení v nastaveniach
-\emph{Settings}.
-Okrem toho sa v liste nachádzajú dve špeciálne hodnoty. \emph{None} vyjadruje že nemáme zvolený žiaden gén a nebudeme vedieť meniť žiadne 
+\paragraph{Nastavenia špecifické pre gén} sa aplikujú na vybraný gén, ktorý zvolíme zo zoznamu.
+V tomto zozname sa nachádzajú všetky gény z histórie, bez ohľadu na to, či pre ne existuje záznam \emph{GeneMeta}.
+Okrem toho sa v zozname nachádzajú dve špeciálne hodnoty. \emph{None} vyjadruje, že nemáme zvolený žiaden gén a nebudeme vedieť meniť žiadne 
 nastavenia špecifické pre gén. \emph{Default} slúži k nastaveniu hodnôt, ktoré využívajú všetky gény bez vlastných \emph{GeneMeta}.
-Pre \emph{Default} nevieme nastavovať \emph{Name} ani \emph{Colour}.
+Pre \emph{Default} nevieme nastavovať položky \emph{Name} ani \emph{Colour}.
 Pokiaľ si z listu zvolíme gén ktorý nemá vlastný záznam \emph{GeneMeta}, tento záznam sa vytvorí až keď tomuto génu nastavíme niektorú z
-hodnôt.Do polí \emph{Draw,Transparent a Highlighted} sa prekopíruje hodnota nastavená v \emph{Default}, zvyšné polia môžu zostať prázdne.
-Pre prázdne polia sa aj naďalej využívajú hodnoty z \emph{Default}.
+hodnôt.Do položiek \emph{Draw, Transparent a Highlighted} sa prekopíruje hodnota nastavená v \emph{Default}, zvyšné položky môžu zostať prázdne.
+Pre prázdne položky sa aj naďalej využívajú hodnoty z \emph{Default}.
 
-\emph{Draw} boolean prepínač, hodnota určuje či sa gén vykreslí.
+\emph{Draw} je prepínač, ktorý určuje, či sa gén vykreslí.
 
-\emph{Transparent} boolean prepínač, pokiaľ sa má gén vykresliť $(draw=true)$, tak hodnota \emph{Transparent} určí, či bude priesvitný $transparent=true$, kedy gén nevidíme, ale zaberá miesto.
-Alebo bude nepriesvitný, kedy farbu získa v závislosti od hodnoty \emph{Highlighted}.
+\emph{Transparent} je prepínač. Pokiaľ sa má gén vykresliť $(draw=true)$, tak hodnota \emph{Transparent} určí, či bude priesvitný $(transparent=true)$, kedy gén nevidíme, ale zaberá miesto.
+Ak bude nepriesvitný, tak farbu získa v závislosti od hodnoty \emph{Highlighted}.
 
-\emph{Highlighted} pokiaľ sa má gén nepriesvitne vykresliť $draw=true,transparent=false$ highlighted rozhodujem o tom, či bude zvýraznený.
-Ak je zvýraznený zobrazí sa s farbou ktorú má nastavenú v \emph{Colour}, v prípade že nemá nastavenú vlastnú farbou použije predpočítanú farbu.
-Ak nieje zvýraznený použije farbu nastavenú v \emph{Non Highlighted}. 
+\emph{Highlighted} rozhoduje o tom či bude gén zvýraznený. Pokiaľ sa má nepriesvitne vykresliť $(draw=true,transparent=false)$.
+Ak je zvýraznený, zobrazí sa farbou ktorú má nastavenú v \emph{Colour}. V prípade, že nemá nastavenú vlastnú farbou, použije predpočítanú farbu.
+Ak nie je zvýraznený, použije farbu nastavenú v globálnom nastavení \emph{Non Highlighted}. 
 
 \emph{Line Width} umožňuje individuálne nastavenie šírky génu. Vkladáme celé číslo.
 
-\emph{Name} je textové pole, v ktorom môžme génu nastaviť jeho meno.
+\emph{Name} je textové pole, v ktorom môžeme génu nastaviť jeho meno.
 
 \emph{Colour} ponúka výber farby špeciálne pre daný gén.
 
-\emph{Delete gene meta} odstráni záznam \emph{GeneMeta} pre práve zvolený gén.Nefunguje pre \emph{Default}.
+\emph{Delete gene meta} odstráni záznam \emph{GeneMeta} pre práve zvolený gén. Nefunguje pre \emph{Default}.
 
 \emph{Delete all meta} odstráni všetky existujúce záznamy \emph{GeneMeta} okrem záznamu \emph{Default}.
 
 \subsection{Argumenty príkazového riadku}
 Nie vždy pre nás musí byť výhodnejšie, ovládať náš program cez grafickú aplikáciu. 
-Ako alternatívu ku grafickej aplikácii ponúka náš program možnost, vložiť mu základné parametre potrebné pre jeho beh už pri jeho spustení.
-Program potom sám vykoná zvolené úkony, bez potreby akejkoľvek ďalšej interakcie zo strany uživateľa. 
-Tento spôsob ovládania programu je výhodný napríklad vtedy, keď cheme automatizovať spracovanie väčšieho počtu vstupov.
-Predstavíme si aké argumenty vieme vložiťna príkazový riadok, a aký vplyv budú mať na priebeh nášho programu. 
+Ako alternatívu ponúka náš program možnosť vložiť mu základné parametre potrebné pre jeho beh už pri jeho spustení.
+Program potom sám vykoná zvolené úkony, bez potreby akejkoľvek ďalšej interakcie zo strany používateľa. 
+Tento spôsob ovládania programu je výhodný napríklad vtedy, keď chceme automatizovať spracovanie väčšieho počtu vstupov.
+Predstavíme si, aké argumenty vieme vložiť na príkazový riadok, a aký vplyv budú mať na priebeh nášho programu. 
 Každý argument ktorý týtmto spôsobom programu vložíme má na začiatku pomlčku. Poradie argumentov nie je dôležité.
 
-\emph{-nogui} argument určujúci že náš program nespustí grafickú aplikáciu, ale vystačí si len s údajmi zo vstupu.
+\emph{-nogui} je argument určujúci, že náš program nespustí grafickú aplikáciu, ale vystačí si len s údajmi zo vstupu.
 
-\emph{-input:filename.history} argument, ktorým ukážeme na súbor "filename.history"\ obsahujúci evolučnú históriu.
-Evolučná história ktorá sa nachádza v tomto súboré sa načíta do programu.
+\emph{-input:filename.history} je argument, ktorým ukážeme na súbor "filename.history"\ obsahujúci evolučnú históriu.
+Evolučná história, ktorá sa nachádza v tomto súbore sa načíta do programu.
 
-\emph{-drawsvg} nahraná evolučná história sa vykreslí vo formáte svg do súboru output.svg.
+\emph{-drawsvg} zabezpečí, že nahraná evolučná história sa vykreslí vo formáte svg do súboru output.svg.
 
-\emph{-svg\_output:filename.svg} miesto súboru output.svg sa obrázok uloží do súboru "filename.svg".
+\emph{-svg\_output:filename.svg} určí, že miesto súboru output.svg sa obrázok uloží do súboru "filename.svg".
 
 \emph{-opt:x} prebehne optimalizáciu počtu zobrazených génov, číslo x má rovnakú funkciu ako nastavenie \emph{Optimization} z grafickej aplikácie.
 
@@ -304,13 +305,12 @@ Evolučná história ktorá sa nachádza v tomto súboré sa načíta do program
 
 \emph{-greedy\_output:filename.svg} miesto do súboru output.greedy sa greedy riešenie uloží do súboru "filename.svg".
 
-\emph{-exportilp} zadanie celočíselného lineárneho programu - \ref{sub:bclp},
-ktorý je ekvivalentný k problému množinového pokrytia pre nahranú evolučnú históriu, sa uloží do súboru output.lp
+\emph{-exportilp} zadanie celočíselného lineárneho programu pre problém výberu génov, viď. časť \ref{chap:setcover}, uloží do súboru output.lp
 
-\emph{ilp\_output:filename.lp} namiesto output.lp sa pre uloženie zadanie celočíselného lineárneho programu využije súbor "filename.lp".
+\emph{ilp\_output:filename.lp} určí, že namiesto output.lp sa pre zadanie celočíselného lineárneho programu využije súbor "filename.lp".
 
 \emph{-load\_lp:input.sol} optimalizuje zobrazené gény na základe riešenia zo súboru ''input.sol".
-Program je nastavený tak aby akceptoval riešenie ktoré prodkuje CPLEX.
+Program je nastavený tak, aby akceptoval riešenie, ktoré prodkuje program CPLEX.
 
 \emph{-load\_settings:filename.xml} do triedy \emph{Settings} načítana nastavenia zo súboru ``filename.xml''.
 

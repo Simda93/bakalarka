@@ -19,7 +19,7 @@ greedy algoritmu ako aj pomocou celočíselného lineárneho programovania. Záv
 \label{sub:generovanie}
 
 \begin{table}[!htb]
-\label{tab:generator}
+
 \begin{center}
 \begin{tabular}{lcl}
 node\_numb & 10 & \\
@@ -32,7 +32,7 @@ insertion & 1 & 5 \\
 transposition & 1 & \\
 \end{tabular}
 \end{center}
-\caption{Ukážka vstupu pre generátor histórií, súbor settings.generator}
+\caption{Ukážka vstupu pre generátor histórií, súbor settings.generator}\label{tab:generator}
 \end{table}
 
 Pre tento účel sme zostrojili jednoduchý program umožňujúci generovanie evolučných histórií.
@@ -62,7 +62,7 @@ To nám umožní sledovať vplyv nastavení generátora na výsledky testovania.
 \label{sub:akotestovat}
 
 \begin{table}[t]
-\label{tab:vyslednedata}
+
 \begin{center}
 %\hspace*{-1cm}
 \begin{tabular}{llllllllll}
@@ -81,7 +81,7 @@ udalosti&gény&p&id&univerzum&subsety&greedy&greedy čas&ilp&ilp čas\\
 10&10&0.8&avg&35.60&15.20&11.80&0.9410&11.60&0.9530\\
 \end{tabular}
 \end{center}
-\caption{Ukážka získaných dát zo súboru file.data, pre jedny nastavenia generátora file.generator}
+\caption{Ukážka získaných dát zo súboru file.data, pre jedny nastavenia generátora file.generator}\label{tab:vyslednedata}
 \end{table}
 
 Ak má čitateľ záujem zopakovať testovanie, tu je návod ako na to.
@@ -129,7 +129,7 @@ stačil na nájdenie riešenia iba zlomok z celkového času.
 
 \begin{table}[t]
 
-\label{tab:data}
+
 \begin{center}
 %\hspace*{-1cm}
 \begin{tabular}{llllllll}
@@ -150,7 +150,7 @@ poradie&udalosti&gény&p&univerzum&subsety&greedy čas&ilp\\
 475&200&50&0.97&593.1&50&129.09&65.178\\
 \end{tabular}
 \end{center}
-\caption{Vybraných 10 zo 475 riadkov ``avg'', zoradené sú podla súčtu času greedy a ilp. }
+\caption{Vybraných 10 zo 475 riadkov ``avg'', zoradené sú podla súčtu času greedy a ilp. }\label{tab:data}
 \end{table}
 
 Druhou vlastnosťou greedy algoritmu ktorá nás zaujíma je, vzdialenosť jeho riešení od optima.
